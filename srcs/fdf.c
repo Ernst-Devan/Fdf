@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 22:45:05 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/17 21:21:22 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/17 22:58:22 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	join_point(t_data *data, t_pair **Pair)
 
 	i = 0;
 	j = 0;
-	while (i < 9)
+	while (i < 14)
 	{
-		while (j < 18)
+		while (j < 15)
 		{
 			bresenham_algorithm(data, Pair[i][j].x, Pair[i][j].y, Pair[i][j + 1].x, Pair[i][j+1].y);
 			bresenham_algorithm(data, Pair[i + 1][j].x, Pair[i + 1][j].y, Pair[i][j].x, Pair[i][j].y);
@@ -94,7 +94,7 @@ void	join_point(t_data *data, t_pair **Pair)
 		j = 0;
 		i++;
 	}
-	while (j < 17)
+	while (j < 15)
 	{
 		bresenham_algorithm(data, Pair[i][j].x, Pair[i][j].y, Pair[i][j + 1].x, Pair[i][j+1].y);
 		j++;
@@ -103,49 +103,64 @@ void	join_point(t_data *data, t_pair **Pair)
 
 void	create_grid(t_data *data, int x, int y, t_pair **map)
 {
-	int template_width;
-
-	template_width = 100;
-
 	int cols;
 	int rows;
+	int x_temp;
+	int y_temp;
+	int i;
+	int j;
 	
-	cols = 10;
-	rows = 4;	
+	cols = 15;
+	rows = 15;	
+	//bresenham_algorithm(data,x - 520, y + 300, x,y);
+	//bresenham_algorithm(data, x, y + 600, x + 520 , y + 300);
 
-	bresenham_algorithm(data, x,y, x + 520, y + 300);
-	bresenham_algorithm(data,x - 520, y + 300, x,y);
+	//Horizontal
+	// x : 520 / 10 | y = 300 / 10
 
-	bresenham_algorithm(data, x - 520, y + 300, x , y + 600);
+	//Vertical
+	// x : 520 / 10 | y = 300 / 10 
+	x_temp = x;
+	y_temp = y;
+	
+	i = 0;
+	j = 0;
+	while (i < rows)
+	{
+		while (j < cols)
+		{
+			put_pixel(data, x_temp, y_temp, 0xFFFFFFFF);
+			//bresenham_algorithm(data, x_temp, y_temp, x_temp + 52, y_temp + 30);
+			map[i][j].x = x_temp;
+			map[i][j].y = y_temp;
+			ft_printf("%d ; %d \n", map[i][j].x, map[i][j].y);
+			x_temp += (520 / cols);
+			y_temp += (300 / rows);
+			j++;
+		}
+		j = 0;
+		//map[m]->x = x_temp;
+		//map[m]->y = y_temp;
+		x -= 520 / cols;
+		x_temp = x;
+		y += 300 / rows;
+		y_temp = y;
+		i++;
+	}
 
-	bresenham_algorithm(data, x, y + 600, x + 520 , y + 300);
+
+	join_point(data, map);
+
+	//bresenham_algorithm(data, x,y, x + 520, y + 300);
+
+	//bresenham_algorithm(data, x - 520, y + 300, x , y + 600);
+
 	
 
 }
 
 // MAYBE NEED TO MAKE A STRUCT OF THE LINE_POINT TO HAVE ACCESS TO HIS LENGHT CAUSE ELSE WE CAN'T STOP THE READ INSIDE IT  
 
-//int	**Get_some__point_line(int **line_points, int space)
-//{
-//	int **line_space;
-//	int i;
-
-//	line_space = malloc(space * sizeof(int *));
-//	if (!line_point)
-//		return (NULL);
-//	i = 0;
-//	while (i < space)
-//	{
-//		line_space[i] = malloc(2 * sizeof(int));
-//		if (!line_space[i])
-//			return (NULL);
-//			// Free all already allocated line
-//		i++;
-//	}
-//	i = 0;
-	
-//	//while (i < )
-//}
 
 int main()
 {
@@ -160,8 +175,8 @@ int main()
 	int i;
 	
 	i = 0;
-	rows = 10;
-	cols = 16;
+	rows = 45;
+	cols = 45;
 
 	t_pair **map;
 	map = malloc(rows * sizeof(t_pair *));

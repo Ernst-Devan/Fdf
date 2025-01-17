@@ -28,6 +28,18 @@ FT_PRINTF_D	=	ft_printf/
 GNL_D 		= 	gnl/
 
 # =======================================
+# Decoration Text - Colors
+# =======================================
+
+red    	= 	/bin/echo -e "\x1b[31m$1\x1b[0m"
+green  	= 	/bin/echo -e "\x1b[32m$1\x1b[0m"
+yellow 	= 	/bin/echo -e "\x1b[33m$1\x1b[0m"
+blue   	= 	/bin/echo -e "\x1b[34m$1\x1b[0m"
+magenta = 	/bin/echo -e "\x1b[35m$1\x1b[0m"
+cyan   	= 	/bin/echo -e "\x1b[36m$1\x1b[0m"
+
+
+# =======================================
 # Source Files - Character Checks
 # =======================================
 
@@ -171,11 +183,12 @@ OBJS = $(SRCS:$(SRC_D)%.c=$(OBJ_D)%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 $(OBJ_D)%.o: $(SRC_D)%.c includes/libft.h includes/ft_printf.h
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(call green," [v] $<")
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(BIN_D):
 	mkdir -p $(BIN_D)

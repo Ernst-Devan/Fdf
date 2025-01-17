@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:07:56 by ernstdevan        #+#    #+#             */
-/*   Updated: 2024/12/15 18:35:19 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 17:09:16 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 	//FT_PRINTF
 	//=======================================
 int	ft_printf(const char *format, ...);
+
+	//GNL
+	//=======================================
+char	*get_next_line(int fd);
 
 #endif

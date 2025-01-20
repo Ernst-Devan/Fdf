@@ -11,7 +11,10 @@ NAME 	= fdf.out
 # =======================================
 
 SRCS 	= fdf.c 	\
-		  parsing.c	
+		  parsing.c	\
+		  draw.c	\
+		  window.c	\
+		  error.c	\
 
 OBJS 	= $(SRCS:.c=.o)
 

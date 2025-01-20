@@ -1,40 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/18 16:00:32 by dernst           ###   ########lyon.fr   */
+/*   Created: 2025/01/20 21:40:54 by dernst            #+#    #+#             */
+/*   Updated: 2025/01/20 21:50:11 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <fcntl.h>
 #include "libft.h"
+#include "fdf.h"
 
-void	parsing_map()
+void	error_management(t_pair **Pair)
 {
-	int fd;
 	int i;
-	int j;
-	char *line;
-	char **map;
 	
-	// Size of BUFFERSIZE
-
 	i = 0;
-	j = 0;
-	// Count before number of line present in the files so maybe need read one time before the 
-	line = malloc(500 * sizeof(char *));
-	fd = open("42.fdf", O_RDONLY);
-	
-	while (line != NULL)
-	{	
-		map[i] = malloc(ft_strlen(line) * sizeof(char));
+	while (i < Pair[0][0].x)
+	{
+		if (Pair[i])
+			free(Pair[i]);
 		i++;
-		line = get_next_line(fd);
-	}	
-	close(fd);
+	}
+	if (Pair)
+		free(Pair);
+	exit(1);
+}
+
+void cleanup(t_pair **map, int index_allocated)
+{
+	int i;
+	
+	i = 0;
+	while (i > index_allocated)
+	{
+		if (map[i])
+			free(map[i]);
+		i++;
+	}
+	if (map)
+		free(map);
 }

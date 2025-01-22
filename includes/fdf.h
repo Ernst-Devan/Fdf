@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/22 15:58:18 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 17:26:44 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void inital_window();
 void initial_program(t_data *window);
 
 // Parsing.c
-int parsing_map(t_map **map);
+int parsing_map(t_map **map, int *rows, int *cols);
 
 // Draw.c
 void bresenham_algorithm(t_data *data, int Ax, int Ay, int Bx, int By);

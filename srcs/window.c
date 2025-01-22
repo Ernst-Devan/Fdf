@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:42:43 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/22 16:08:22 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 18:10:55 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,23 @@ void initial_program(t_data *window)
 	int i;
 	t_map **map;
 	
-	rows = 12;
-	cols = 19;
+	rows = 0;
+	cols = 0;
 	i = 0;
 
-	map = malloc((500) * sizeof(t_map *));
-	while (i < rows)
-	{
-		map[i] = malloc((500) * sizeof(t_map));
-		i++;
-	}
-	
-	if (parsing_map(map) == 1)
+	//map = malloc((500) * sizeof(t_map *));
+	//while (i < rows)
+	//{
+	//	map[i] = malloc((500) * sizeof(t_map));
+	//	i++;
+	//}
+	if (parsing_map(map, &rows, &cols) == 1)
 	{
 		ft_printf("Invalid map\n");
 		exit(1);
 	}
 
-	isometrics_cordonate(window, map);
+	//isometrics_cordonate(window, map);
 }
 
 void inital_window()

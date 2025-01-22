@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/22 16:17:36 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 18:02:09 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void isometrics_cordonate(t_data *window, t_map **map)
 			map[i][j].y = (sqrt(2.0 / 3.0) * map[i][j].z) - ((1.0 / sqrt(6.0)) * (map[i][j].x + map[i][j].y));
 			map[i][j].x += 960;
 			map[i][j].y += 540;
-			ft_printf("x: %d y: %d z: %d\n", (map[i][j].x), (map[i][j].y), map[i][j].z);
 			put_pixel(window, map[i][j].x, map[i][j].y, 0xFFFFFFFF);
 			
 			j++;

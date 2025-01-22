@@ -6,19 +6,20 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/22 16:19:33 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 18:26:03 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 #include "libft.h"
+#include <stdio.h>
 
 // Detect overflow inside the map
 // If overflow int don't accept the map
 // Need to add the check if all the cols have the same size
 
-int verif_map(const char *line, int *rows, int *cols)
+int verif_map(const char *line)
 {
 	int i;
 	i = 0;
@@ -33,35 +34,8 @@ int verif_map(const char *line, int *rows, int *cols)
 		if (line[i] != ' ' && i != ft_strlen(line) - 1)
 			return (1);
 		i++;
-			*cols += 1;
 	}
-	*rows += 1;
 	return (0); 
-}
-
-int check_map()
-{
-	int fd;
-	char *line;
-	int rows;
-	int cols;
-	int verif;
-	
-	cols = 0;
-	rows = 0;
-
-	fd = open("42.fdf", O_RDONLY);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{	
-		verif = verif_map(line, &rows, &cols);
-		if (verif == 1)
-			return(1);
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
 }
 
 int count_cols(char **splited_line)
@@ -74,7 +48,43 @@ int count_cols(char **splited_line)
 	return (i);
 }
 
-int get_map_value(t_map **map)
+// The checker of cols don't work
+int check_map(int *rows, int *cols)
+{
+	int fd;
+	char *line;
+	char **splited_line;
+	int verif;
+	
+	fd = open("42.fdf", O_RDONLY);
+	line = get_next_line(fd);
+	splited_line = ft_split(line, ' ');
+	*cols = count_cols(splited_line);
+	ft_printf("DEFINED COLS: %d\n", *cols);
+	while (line != NULL)
+	{	
+		verif = verif_map(line);
+		if (verif == 1)
+			return(1);
+		free(splited_line);
+		free(line);
+		line = get_next_line(fd);
+		if (line)
+		{
+			splited_line = ft_split(line, ' ');
+			if (count_cols(splited_line) != *cols)
+			{
+				return (1);
+			}
+		}
+		*rows += 1;
+	}
+	close(fd);
+	return (0);
+}
+
+
+int get_map_value(t_map **map, int *rows, int *cols)
 {
 
 	int fd;
@@ -82,25 +92,19 @@ int get_map_value(t_map **map)
 	char *line;
 	int i;
 	int j;
-	int rows;
-	int cols;
 
-
-	rows = 11;
-	cols =  19;
 	i = 0;
 	j = 0;
 	fd = open("42.fdf", O_RDONLY);
 	line = get_next_line(fd);
-	while (i < rows && line != NULL)
+	while (i < *rows && line != NULL)
 	{
 		splited_line = ft_split(line, ' ');
-		while (j < cols)
+		while (j < *cols)
 		{
 			map[i][j].x = j + (50 *j);
 			map[i][j].y = i + (100* i);
 			map[i][j].z = ft_atoi(splited_line[j]);
-			ft_printf("i: %d j:%d \n", i , j);
 			j++;
 		}
 		i++;
@@ -112,15 +116,15 @@ int get_map_value(t_map **map)
 	close(fd);
 }
 
-int	parsing_map(t_map **map)
+int	parsing_map(t_map **map, int *rows, int *cols)
 {
 	int i;
 
 	i = 0;
-
-	if (check_map() == 0)
+	if (check_map(rows, cols) == 0)
 	{
-		get_map_value(map);
+		//ft_printf(" cols : !%d! rows: !%d!\n", *cols,*rows);
+		//get_map_value(map, rows, cols);
 		
 		return (0);
 	}

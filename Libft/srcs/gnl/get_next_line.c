@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:06:59 by dernst            #+#    #+#             */
-/*   Updated: 2024/12/17 19:27:50 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/20 22:45:14 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*update_result(char (*buffer)[BUFFER_SIZE], char **result, int fd)
 
 	is_end = 0;
 	start = 0;
-	bytes_read = ft_strlen(*buffer, 0);
+	bytes_read = ft_strlen_gnl(*buffer, 0);
 	if (bytes_read == 0)
 	{
 		bytes_read = read_file(buffer, fd, result);

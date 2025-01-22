@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 22:45:05 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/20 21:42:31 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/21 16:08:26 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // [] CHECK IF WE CAN USE THE EXIT FUNCTION TO ESCAPE FROM EACH FUNCTION WITH FAILED MALLOC FOR EXEMPLE
 // [] DO THE ERROR MANAGEMENT
 // [x] REMOVE THE FUNCTION ABS AND REMAKE IT 
+// [] CHECK ALL FREE ARE DO SAME FOR FUNCTION OF THE LIBFT
 
 
 // (10,2), (12,3), (14,4)
@@ -51,42 +52,38 @@ void put_pixel(t_data *data, int x, int y, int color)
 
 int main()
 {
-	void	*mlx;
-	t_data img;
-	void	*mlx_win;
-
-	// Malloc with the result of the parsing 
-	int rows;
-	int cols;
-	int i;
 	
-	i = 0;
-	rows = 40;
-	cols = 40;
+	inital_window();
 
-	t_pair **map;
-	map = malloc(rows * sizeof(t_pair *));
-	if (!map)
-		return (1);
+	//void	*mlx;
+	//t_data img;
+	//void	*mlx_win;
+
+	//// Malloc with the result of the parsing 
+	//int rows;
+	//int cols;
+	//int i;
 	
-	while (i < rows)
-	{
-		map[i] = malloc(cols * sizeof(t_pair));
-		if (!map[i])
-		{
-			cleanup(map, i);
-			return (1);
-		}
-		i++;
-	}
-	map[0][0].x = cols;
-	map[0][0].y = rows;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "FDF");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
-	img.status = 0;
-	create_grid_square(&img, 1920, 980, map);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0,0);
-	mlx_loop(mlx);
+	//i = 0;
+	//rows = 40;
+	//cols = 40;
+
+	//t_pair **map;
+	//map = malloc(rows * sizeof(t_pair *));
+	//if (!map)
+	//	return (1);
+	
+	//while (i < rows)
+	//{
+	//	map[i] = malloc(cols * sizeof(t_pair));
+	//	if (!map[i])
+	//	{
+	//		cleanup(map, i);
+	//		return (1);
+	//	}
+	//	i++;
+	//}
+	//map[0][0].x = cols;
+	//map[0][0].y = rows;
+	//create_grid_square(&img, 1920, 980, map);
 }

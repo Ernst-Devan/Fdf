@@ -6,30 +6,30 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:40:54 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/20 21:50:11 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/21 12:09:37 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
 
-void	error_management(t_pair **Pair)
+void	error_management(t_map **map)
 {
 	int i;
 	
 	i = 0;
-	while (i < Pair[0][0].x)
+	while (i < map[0][0].x)
 	{
-		if (Pair[i])
-			free(Pair[i]);
+		if (map[i])
+			free(map[i]);
 		i++;
 	}
-	if (Pair)
-		free(Pair);
+	if (map)
+		free(map);
 	exit(1);
 }
 
-void cleanup(t_pair **map, int index_allocated)
+void cleanup(t_map **map, int index_allocated)
 {
 	int i;
 	

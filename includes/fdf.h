@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/20 21:47:47 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 15:58:18 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,30 @@ typedef struct s_line {
 	int size;
 }		t_line;
 
-typedef struct s_pair {
+typedef struct	s_map {
 	int x;
 	int y;
-}	t_pair;
+	int z;
+	char color;
+}		t_map;
 
 // Fdf.c
 void put_pixel(t_data *data, int x, int y, int color);
 
+// Window.c
+void inital_window();
+void initial_program(t_data *window);
+
 // Parsing.c
-void parsing_map();
+int parsing_map(t_map **map);
 
 // Draw.c
 void bresenham_algorithm(t_data *data, int Ax, int Ay, int Bx, int By);
-void create_grid_square(t_data *data, int x, int y, t_pair **map);
-void join_point(t_data *data, t_pair **Pair, int cols, int rows);
+void isometrics_cordonate(t_data *window, t_map **map);
+void join_point(t_data *data, t_map **map, int cols, int rows);
 
 // Error.c
-void error_management(t_pair **Pair);
-void cleanup(t_pair **map, int index_allocated);
+void error_management(t_map **map);
+void cleanup(t_map **map, int index_allocated);
 
 #endif

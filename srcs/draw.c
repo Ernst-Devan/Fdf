@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/20 21:40:17 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 16:17:36 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	bresenham_algorithm(t_data *data, int Ax, int Ay, int Bx, int By)
 	}
 }
 
-void	join_point(t_data *data, t_pair **Pair, int cols, int rows)
+void	join_point(t_data *data, t_map **map, int cols, int rows)
 {
 	int i;
 	int j;
@@ -65,9 +65,9 @@ void	join_point(t_data *data, t_pair **Pair, int cols, int rows)
 		while (j < cols + 1)
 		{
 			if (i == 0)
-				bresenham_algorithm(data, Pair[i + 1][j - 1].x, Pair[i + 1][j - 1].y, Pair[i][j].x, Pair[i][j].y);
-			bresenham_algorithm(data, Pair[i][j].x, Pair[i][j].y, Pair[i][j + 1].x, Pair[i][j+1].y);
-			bresenham_algorithm(data, Pair[i + 1][j].x, Pair[i + 1][j].y, Pair[i][j].x, Pair[i][j].y);
+				bresenham_algorithm(data, map[i + 1][j - 1].x, map[i + 1][j - 1].y, map[i][j].x, map[i][j].y);
+			bresenham_algorithm(data, map[i][j].x, map[i][j].y, map[i][j + 1].x, map[i][j+1].y);
+			bresenham_algorithm(data, map[i + 1][j].x, map[i + 1][j].y, map[i][j].x, map[i][j].y);
 
 			j++;	
 		}
@@ -76,50 +76,29 @@ void	join_point(t_data *data, t_pair **Pair, int cols, int rows)
 	}
 }
 
-void	create_grid_square(t_data *data, int x, int y, t_pair **map)
+void isometrics_cordonate(t_data *window, t_map **map)
 {
-	int cols;
-	int rows;
-	int x_temp;
-	int y_temp;
-	int j;
 	int i;
+	int j;
 
-	cols = 10;
-	rows = 10;
-	j = 1;
 	i = 0;
-	int x_start;
-	int y_start;
-
-	int separation_x;
-	int separation_y;
-	
-	x_start = x / 2;
-	y_start = ((1080 - y) / 6);
-	x_temp = x_start;
-	y_temp = y_start;
-
-	separation_x = tan(60 * PI / 180) * (y / 2);
-	separation_y = y / 2 ;
-	while (i < rows + 1)
+	j = 0;
+	while (i < 11)
 	{
-		while (j < cols + 1)
+		while (j < 19)
 		{
-			ft_printf("%d : %d\n", i , j);
-			put_pixel(data, x_temp, y_temp, 0xFFFFFFFF);
-			map[i][j].x = x_temp;
-			map[i][j].y = y_temp;
-			x_temp += (separation_x / cols);
-			y_temp += (separation_y / cols);
+			map[i][j].x = ((sqrt(2) / 2) * (map[i][j].x - map[i][j].y));
+			map[i][j].y = (sqrt(2.0 / 3.0) * map[i][j].z) - ((1.0 / sqrt(6.0)) * (map[i][j].x + map[i][j].y));
+			map[i][j].x += 960;
+			map[i][j].y += 540;
+			ft_printf("x: %d y: %d z: %d\n", (map[i][j].x), (map[i][j].y), map[i][j].z);
+			put_pixel(window, map[i][j].x, map[i][j].y, 0xFFFFFFFF);
+			
 			j++;
 		}
 		j = 0;
-		x_start -= separation_x / rows;
-		x_temp = x_start;
-		y_start += separation_y / rows;
-		y_temp = y_start;
 		i++;
 	}
-	join_point(data, map, cols, rows);
+
+	join_point(window, map, 16, 10);
 }

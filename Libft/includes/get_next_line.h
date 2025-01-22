@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:43:52 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/15 17:09:23 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/20 22:44:28 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*ft_substr(char *s, size_t len, size_t *is_end, size_t *buffer_start);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *str, int type);
+size_t	ft_strlen_gnl(const char *str, int type);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*null_free(char **str);
 

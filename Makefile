@@ -3,7 +3,7 @@
 # =======================================
 
 CC		= cc
-CFLAGS 	= -Wall -Werror -Wextra
+CFLAGS 	= -Wall -Werror -Wextra -g3
 NAME 	= fdf.out
 
 # =======================================
@@ -57,7 +57,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_D)%.o: $(SRC_D)%.c $(OBJ_D)
 	@$(call green," [v] $<")
-	@$(CC) $(INC_D) -O3 -c $< -o $@
+	@$(CC) $(INC_D) -g3 -c $< -o $@
 
 .PHONY: clean
 .SILENT:

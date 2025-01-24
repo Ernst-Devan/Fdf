@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 22:45:05 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/21 16:08:26 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 15:46:35 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,18 @@
 // [x] ADD LIBFT
 // [x] UNDERSTAND HOW WORK MINLIBX
 // [x] INSTALL MINLIBX INSIDE THE PROJECT
-// [] DONT FORGET TO ADD FLAGS DURINT THE COMPILATION
+// ![] DONT FORGET TO ADD FLAGS DURINT THE COMPILATION
 // [x] MAKE A WINDOWS 
-// [] MAKE THE GRID
-// [] ALL RETURN POINTER MUST BE CHECKED IF THEY RETURN NULL
-// [] PROTECT NEGATIVE NUMBER INSIDE A PUT PIXEL
-// [] CLOSE THE WINDOW WHITH THE CROSS AND ECHAP
-// [] TO JOIN POINT WE NEED TO MAKE A MAP OF EACH POINT PLACED WITH HIS LOCATION LIKE THIS
-// [] CHECK IF WE CAN USE THE EXIT FUNCTION TO ESCAPE FROM EACH FUNCTION WITH FAILED MALLOC FOR EXEMPLE
-// [] DO THE ERROR MANAGEMENT
-// [x] REMOVE THE FUNCTION ABS AND REMAKE IT 
-// [] CHECK ALL FREE ARE DO SAME FOR FUNCTION OF THE LIBFT
+// ![] MAKE THE GRID
+// ![] ALL RETURN POINTER MUST BE CHECKED IF THEY RETURN NULL
+// ![] PROTECT NEGATIVE NUMBER INSIDE A PUT PIXEL
+// ![] CLOSE THE WINDOW WHITH THE CROSS AND ECHAP
+// ![] TO JOIN POINT WE NEED TO MAKE A MAP OF EACH POINT PLACED WITH HIS LOCATION LIKE THIS
+// ![] CHECK IF WE CAN USE THE EXIT FUNCTION TO ESCAPE FROM EACH FUNCTION WITH FAILED MALLOC FOR EXEMPLE
+// ![] DO THE ERROR MANAGEMENT
+// [] REMOVE THE FUNCTION ABS AND REMAKE IT 
+// ![] CHECK ALL FREE ARE DO SAME FOR FUNCTION OF THE LIBFT
 
-
-// (10,2), (12,3), (14,4)
-// (9,1), (10, -2), (14,-4)
-// etc ..
-
-// Without negative number 
-// So we know that we must joint the map[0][0] and map[0][1] | map[0][0] with map[1][0]
 
 
 
@@ -54,36 +47,5 @@ int main()
 {
 	
 	inital_window();
-
-	//void	*mlx;
-	//t_data img;
-	//void	*mlx_win;
-
-	//// Malloc with the result of the parsing 
-	//int rows;
-	//int cols;
-	//int i;
 	
-	//i = 0;
-	//rows = 40;
-	//cols = 40;
-
-	//t_pair **map;
-	//map = malloc(rows * sizeof(t_pair *));
-	//if (!map)
-	//	return (1);
-	
-	//while (i < rows)
-	//{
-	//	map[i] = malloc(cols * sizeof(t_pair));
-	//	if (!map[i])
-	//	{
-	//		cleanup(map, i);
-	//		return (1);
-	//	}
-	//	i++;
-	//}
-	//map[0][0].x = cols;
-	//map[0][0].y = rows;
-	//create_grid_square(&img, 1920, 980, map);
 }

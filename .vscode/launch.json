@@ -2,6 +2,15 @@
   "version": "0.2.0",
   "configurations": [
 	{
+		"type": "lldb",
+		"request": "launch",
+		"name": "(lldb) Launch",
+		"program": "${workspaceFolder}/fdf.out",
+		"args": [],
+		"cwd": "${workspaceFolder}",
+		"preLaunchTask": "build"
+	},
+	{
 		"name": "(gdb) Launch",
 		"type": "cppdbg",
 		"request": "launch",
@@ -12,6 +21,7 @@
 		"environment": [],
 		"externalConsole": false,
 		"MIMode": "gdb",
+		"preLaunchTask": "build",
 		"setupCommands": [
 			{
 				"description": "Enable pretty-printing for gdb",
@@ -24,25 +34,6 @@
 				"ignoreFailures": true
 			}
 		]
-	},
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/dernst/42-Cursus/Fdf/srcs",
-      "program": "/home/dernst/42-Cursus/Fdf/srcs/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
-    }
+	}
   ]
 }

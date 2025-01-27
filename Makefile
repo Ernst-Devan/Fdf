@@ -15,6 +15,9 @@ SRCS 	= fdf.c 	\
 		  draw.c	\
 		  window.c	\
 		  error.c	\
+		  init.c	\
+		  utils.c	\
+		  vector.c	\
 
 OBJS 	= $(SRCS:.c=.o)
 

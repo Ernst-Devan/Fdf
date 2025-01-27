@@ -4,19 +4,19 @@
 ## Project's descrition
 Fdf representing a landscape as a 3D object in wich all surfaces are outlined in lines.
 
-# Project overview
+## Project overview
 
 ## Getting Started
-# Download the repository
+### Download the repository
 ```
 git clone https://github.com/Ernst-Devan/Fdf.git Dernst_fdf
 ```
-# Access and compile the project
+### Access and compile the project
 ```
 cd Dernst_fdf
 make
 ```
-# Launch the program
+### Launch the program
 ```
 ./fdf
 ```

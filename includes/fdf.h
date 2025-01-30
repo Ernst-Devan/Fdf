@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/27 18:00:26 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/30 23:03:34 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data {
 	int		status;
 	int		width;
 	int		lenght;
+	char	*fd_map;
 	t_map 	map;
 }		t_data;
 
@@ -55,22 +56,19 @@ void	init_point(t_point *point);
 
 
 // Window.c
-void inital_window();
+void inital_window(char *map_name);
 void initial_program(t_data *window);
 
 
 // Draw.c
 void put_pixel(t_data *data, int x, int y, int color);
 void bresenham_algorithm(t_data *data, int Ax, int Ay, int Bx, int By);
-void isometrics_cordonate(t_data *window, t_map **map, int *rows, int *cols);
+void isometrics_cordonate(t_data *win);
 void join_point(t_data *data, t_map **map, int cols, int rows);
 
 // Parsing.c
 int	parsing_map(t_data *win);
 
 
-// Error.c
-void error_management(t_map **map);
-void cleanup(t_data *win, size_t j);
 
 #endif

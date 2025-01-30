@@ -6,13 +6,13 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:06:59 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/20 22:45:14 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/28 17:43:02 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*null_free(char **str)
+char	*gnl_null_free(char **str)
 {
 	free(*str);
 	*str = NULL;
@@ -41,8 +41,8 @@ size_t	get_buffer(char *buffer, char **line, int bytes_read, size_t *is_end)
 	size_t	buffer_start;
 
 	buffer_start = 0;
-	temp_result = ft_substr(buffer, bytes_read, is_end, &buffer_start);
-	*line = ft_strjoin(*line, temp_result);
+	temp_result = gnl_ft_substr(buffer, bytes_read, is_end, &buffer_start);
+	*line = gnl_ft_strjoin(*line, temp_result);
 	free(temp_result);
 	temp_result = NULL;
 	return (buffer_start);
@@ -56,12 +56,12 @@ char	*update_result(char (*buffer)[BUFFER_SIZE], char **result, int fd)
 
 	is_end = 0;
 	start = 0;
-	bytes_read = ft_strlen_gnl(*buffer, 0);
+	bytes_read = gnl_ft_strlen(*buffer, 0);
 	if (bytes_read == 0)
 	{
 		bytes_read = read_file(buffer, fd, result);
 		if (bytes_read <= 0)
-			return (null_free(result));
+			return (gnl_null_free(result));
 	}
 	while (is_end == 0)
 	{
@@ -71,9 +71,9 @@ char	*update_result(char (*buffer)[BUFFER_SIZE], char **result, int fd)
 		if (bytes_read == 0)
 			return (*result);
 		if (bytes_read == -1)
-			return (null_free(result));
+			return (gnl_null_free(result));
 	}
-	ft_memmove(*buffer, *buffer + start, bytes_read - start);
+	gnl_ft_memmove(*buffer, *buffer + start, bytes_read - start);
 	return (*result);
 }
 
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (fd < 0)
 		return (NULL);
-	result = ft_calloc(1, sizeof(char));
+	result = gnl_ft_calloc(1, sizeof(char));
 	if (!result)
 		return (NULL);
 	result[0] = '\0';

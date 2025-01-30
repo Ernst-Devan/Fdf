@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/27 14:37:40 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/30 23:33:55 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 
 
-//void put_pixel(t_data *data, int x, int y, int color)
-//{
-//	char *dst;
+void put_pixel(t_data *data, int x, int y, int color)
+{
+	char *dst;
 
-//	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel / 8));
-//	*(unsigned int*)dst = color;
-//}
+	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
 //// MAKE BRESENHAM ALGO FOR ALL LINE POSSINLE
 ////JUST NEED TO REVERSE AU LIEU DE FAIRE AX TO BX SI SA MARCHE APS ON FAIT BX TO AX ET LA POUF SA MARCHE
@@ -81,35 +81,29 @@
 //}
 
 
-//void isometrics_cordonate(t_data *window, t_map **map, int *rows, int *cols)
-//{
-//	int i;
-//	int j;
-//	double a;
+void isometrics_cordonate(t_data *win)
+{
+	int i;
+	int j;
+	double a;
+	a = 0.5;
 
-//	a = 0.5;
+	i = 0;
+	j = 0;
+	while (i < win->map.memory_rows)
+	{
+		while (j < win->map.memory_cols)
+		{
+			win->map.points[i][j].x = win->map.points[i][j].x * cos(a) + win->map.points[i][j].y * cos(a + 2) + win->map.points[i][j].z * cos(a - 2);
+			win->map.points[i][j].y = win->map.points[i][j].x * sin(a) + win->map.points[i][j].y * sin(a + 2) + win->map.points[i][j].z * sin(a - 2);
+			win->map.points[i][j].x += 800;
+			win->map.points[i][j].y += 350;
+			//put_pixel(win, win->map.points[i][j].x, win->map.points[i][j].y, 0xFFFFFFFF);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 
-//	i = 0;
-//	j = 0;
-//	while (i < *rows)
-//	{
-//		while (j < *cols)
-//		{
-			
-//			map[i][j].x = map[i][j].x * cos(a) + map[i][j].y * cos(a + 2) + map[i][j].z * cos(a - 2);
-//			map[i][j].y = map[i][j].x * sin(a) + map[i][j].y * sin(a + 2) + map[i][j].z * sin(a - 2);
-//			//map[i][j].x = ((sqrt(2) / 2) * (map[i][j].x - map[i][j].y));
-//			//map[i][j].y = (sqrt(2.0 / 3.0) * map[i][j].z) - ((1.0 / sqrt(6.0)) * (map[i][j].x + map[i][j].y));
-//			map[i][j].x += 800;
-//			map[i][j].y += 350;
-//			ft_printf("%d, %d \n",  map[i][j].x, map[i][j].y);
-//			put_pixel(window, map[i][j].x, map[i][j].y, 0xFFFFFFFF);
-			
-//			j++;
-//		}
-//		j = 0;
-//		i++;
-//	}
-
-//	join_point(window, map, *rows, *cols);
-//}
+	//join_point(window, map, *rows, *cols);
+}

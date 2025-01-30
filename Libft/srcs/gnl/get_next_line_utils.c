@@ -6,13 +6,13 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:12:00 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/20 22:45:09 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/30 22:25:09 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*gnl_ft_calloc(size_t nmemb, size_t size)
 {
 	void	*buffer;
 	size_t	i;
@@ -37,14 +37,14 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-char	*ft_substr(char *s, size_t len, size_t *is_end, size_t *buffer_start)
+char	*gnl_ft_substr(char *s, size_t len, size_t *is_end, size_t *buffer)
 {
 	char	*str;
 	char	*src;
 	size_t	i;
 	size_t	start;
 
-	str = ft_calloc(len + 1, sizeof(char));
+	str = gnl_ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (NULL);
 	start = 0;
@@ -62,11 +62,11 @@ char	*ft_substr(char *s, size_t len, size_t *is_end, size_t *buffer_start)
 		}
 		i++;
 	}
-	*buffer_start = i;
+	*buffer = i;
 	return (str);
 }
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*gnl_ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
@@ -91,7 +91,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gnl_ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	size_t	i;
@@ -101,9 +101,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s2)
 		return (free((char *)s1), NULL);
-	len_s1 = ft_strlen_gnl(s1, 1);
-	len_s2 = ft_strlen_gnl(s2, 1);
-	str = ft_calloc((len_s1 + len_s2) + 1, sizeof(char));
+	len_s1 = gnl_ft_strlen(s1, 1);
+	len_s2 = gnl_ft_strlen(s2, 1);
+	str = gnl_ft_calloc((len_s1 + len_s2) + 1, sizeof(char));
 	if (!str)
 		return (free((char *)s1), NULL);
 	j = 0;
@@ -114,11 +114,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j] && len_s2)
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	null_free((char **)&s1);
+	gnl_null_free((char **)&s1);
 	return (str);
 }
 
-size_t	ft_strlen_gnl(const char *str, int type)
+size_t	gnl_ft_strlen(const char *str, int type)
 {
 	size_t	i;
 

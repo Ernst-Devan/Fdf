@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 14:03:33 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/28 13:57:47 by dernst           ###   ########lyon.fr   */
+/*   Created: 2025/01/28 22:59:17 by dernst            #+#    #+#             */
+/*   Updated: 2025/01/30 22:22:56 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-size_t	ft_ishexa(int c);
-int	abs_value(int x);
-int	count_word(char *line);
-int	count_cols(char **splited_line);
-
-#endif
+int	ft_isupper(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (1);
+	return (0);
+}

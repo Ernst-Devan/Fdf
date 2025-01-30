@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:07:56 by ernstdevan        #+#    #+#             */
-/*   Updated: 2025/01/15 17:09:16 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/30 22:40:47 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,22 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		ft_isspace(int c);
+int		ft_isupper(int c);
+int		ft_islower(int c);
 
 	// FT_STR
 	//=======================================
+
+typedef struct s_limits
+{
+	int		c;
+	int		clim;
+	int		neg;
+	size_t	coff;
+	int		base;
+}	t_limits;
+
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
@@ -43,6 +56,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
@@ -107,10 +121,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 	//FT_PRINTF
 	//=======================================
-int	ft_printf(const char *format, ...);
-
-	//GNL
-	//=======================================
-char	*get_next_line(int fd);
+int		ft_printf(const char *format, ...);
 
 #endif

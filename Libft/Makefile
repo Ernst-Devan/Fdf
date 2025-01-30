@@ -16,28 +16,16 @@ SRC_D		=	srcs/
 BIN_D		=	bin/
 INCLUDES_D	=	-Iincludes/
 
-FT_IS_D		=	ft_is/
-FT_STR_D	=	ft_str/
-FT_MEM_D	=	ft_mem/
-FT_PUT_D	=	ft_put/
-FT_INT_D	=	ft_int/
-FT_TO_D		=	ft_to/
-FT_ALLOC_D	=	ft_alloc/
-FT_LST_D	=	ft_lst/
-FT_PRINTF_D	=	ft_printf/
+FT_IS_D		=	is/
+FT_STR_D	=	str/
+FT_MEM_D	=	memory/
+FT_PUT_D	=	write/
+FT_INT_D	=	int/
+FT_TO_D		=	to/
+FT_ALLOC_D	=	allocation/
+FT_LST_D	=	chained_list/
+FT_PRINTF_D	=	printf/
 GNL_D 		= 	gnl/
-
-# =======================================
-# Decoration Text - Colors
-# =======================================
-
-red    	= 	/bin/echo -e "\x1b[31m$1\x1b[0m"
-green  	= 	/bin/echo -e "\x1b[32m$1\x1b[0m"
-yellow 	= 	/bin/echo -e "\x1b[33m$1\x1b[0m"
-blue   	= 	/bin/echo -e "\x1b[34m$1\x1b[0m"
-magenta = 	/bin/echo -e "\x1b[35m$1\x1b[0m"
-cyan   	= 	/bin/echo -e "\x1b[36m$1\x1b[0m"
-
 
 # =======================================
 # Source Files - Character Checks
@@ -49,6 +37,9 @@ FT_IS_SRC =						\
 	ft_isalnum.c				\
 	ft_isascii.c				\
 	ft_isprint.c				\
+	ft_isspace.c				\
+	ft_islower.c				\
+	ft_isupper.c				\
 
 # =======================================
 # Source Files - String Functions
@@ -69,6 +60,7 @@ FT_STR_SRC =					\
 	ft_split.c					\
 	ft_strmapi.c				\
 	ft_striteri.c				\
+	ft_strtol.c					\
 	ft_bzero.c
 
 # =======================================
@@ -129,7 +121,8 @@ FT_LST_SRC =					\
 	ft_lstadd_front_bonus.c 	\
 	ft_lstsize_bonus.c 			\
 	ft_lstlast_bonus.c 			\
-	ft_lstadd_back_bonus.c 
+	ft_lstadd_back_bonus.c 		\
+
 
 # =======================================
 # Source Files - List Functions
@@ -172,8 +165,9 @@ SRCS = $(FT_IS_SRC) $(FT_STR_SRC) $(FT_MEM_SRC) $(FT_PUT_SRC) $(FT_INT_SRC) $(FT
 # Objets Files
 # =======================================
 
-OBJ_DIRS = $(addprefix $(OBJ_D), $(FT_IS_D) $(FT_STR_D) $(FT_MEM_D) $(FT_PUT_D) $(FT_INT_D) $(FT_TO_D) $(FT_ALLOC_D) $(FT_LST_D)) $(FT_PRINTF_D) $(GNL_D)
-OBJS = $(SRCS:$(SRC_D)%.c=$(OBJ_D)%.o)
+#OBJS = $(SRCS:$(SRC_D)%.c=$(OBJ_D)%.o)
+OBJS = $(patsubst $(SRC_D)%.c, $(OBJ_D)%.o ,$(SRCS))
+#DEPS = $(patsubst $(SRC_D)%.c, $(OBJ_D)%.d ,$(SRCS))
 
 # =======================================
 # Commands
@@ -183,20 +177,19 @@ OBJS = $(SRCS:$(SRC_D)%.c=$(OBJ_D)%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	@ar rcs $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-$(OBJ_D)%.o: $(SRC_D)%.c includes/libft.h includes/ft_printf.h
+$(OBJ_D)%.o:$(SRC_D)%.c
 	@mkdir -p $(dir $@)
-	@$(call green," [v] $<")
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BIN_D):
 	mkdir -p $(BIN_D)
 
-
 .PHONY: debug
 debug: $(OBJS) | $(BIN_D)
 	$(CC) $(OBJS) $(CFLAGS) -g -o $(BIN_D)a.out
+	cd bin && ./a.out
 
 .PHONY: clean
 clean: 

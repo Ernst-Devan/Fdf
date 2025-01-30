@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/27 17:48:38 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 00:10:34 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,25 @@ void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 	}
 }
 
+
+//TODOz Failed allocation and reset the win->cols must be equals 0 and not 1
 int	map_reaalloc(t_data *win)
 {
 	t_point	**new_points;
-	size_t i;
+	size_t	i;
+	
 	win->map.memory_rows++;
-	new_points = malloc(win->map.memory_rows * sizeof(t_point*));
+	new_points = malloc(win->map.memory_rows + 1 * sizeof(t_point*));
 	if (!new_points)
 		exit(1);
 	i = 0;
-	while (i < win->map.memory_rows)
+	while (i < win->map.memory_rows + 1)
 	{
-		new_points[i] = malloc(win->map.memory_cols * sizeof(t_point));
+		new_points[i] = malloc(win->map.memory_cols + 1 * sizeof(t_point));
 		if (!new_points[i])
 			cleanup(win, i);
-		if (i < win->map.memory_rows - 1)
-			memlistcpy(win->map.points[i], new_points[i], win->map.cols);
+		if (i < win->map.memory_rows)
+			memlistcpy(win->map.points[i], new_points[i], win->map.memory_cols + 1);
 		i++;
 	}
 	free(win->map.points);

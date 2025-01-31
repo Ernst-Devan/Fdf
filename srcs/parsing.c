@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/30 23:59:18 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 18:39:28 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	get_point_line(t_data *win, char *line)
 	i = 0;
 	while (i < win->map.memory_cols)
 	{
-		new_point.x = win->map.cols;
-		new_point.y = win->map.rows;
-		new_point.z = 1;
+		new_point.x = i * (45);
+		new_point.z = ft_strtol(line, &line, 10);
+		new_point.y = win->map.rows * (40);
 		map_add_point(win, new_point);
 		i++;
 	}
@@ -73,7 +73,7 @@ int	parsing_map(t_data *win)
 		exit(4);
 	}
 	line = get_next_line(fd);
-	win->map.memory_cols = count_word(line) - 1;
+	win->map.memory_cols = count_word(line);
 	map_first_alloc(win);
 	while(line != NULL)
 	{
@@ -81,7 +81,6 @@ int	parsing_map(t_data *win)
 		free(line);
 		line = get_next_line(fd);
 	}
-	display_point(win);
 	return (0);
 }
 

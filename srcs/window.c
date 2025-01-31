@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:42:43 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/30 23:50:29 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 17:58:44 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void initial_program(t_data *win)
 {
 	parsing_map(win);
-		//isometrics_cordonate(win);
+	isometrics_cordonate(win);
 }
 
 void inital_window(char *map_name)

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:15:08 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/30 23:50:39 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 16:28:42 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_map	init_map()
 	map.cols = 0;
 	map.rows = 0;
 	map.memory_cols = 0;
-	map.memory_rows = 0;
+	map.memory_rows = 1;
 	map.points = NULL;
 	return (map);
 }

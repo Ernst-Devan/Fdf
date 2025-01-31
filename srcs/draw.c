@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/31 18:37:37 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 21:10:02 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	join_point(t_data *data)
 	{
 		while (j < data->map.memory_cols)
 		{
-			ft_printf("i:%d j:%d \n",  i,j);
 			bresenham_algorithm(data, data->map.points[i][j].x, data->map.points[i][j].y, data->map.points[i][j + 1].x, data->map.points[i][j+1].y);
 			if (i < data->map.memory_rows - 1)
 				bresenham_algorithm(data, data->map.points[i + 1][j].x, data->map.points[i + 1][j].y, data->map.points[i][j].x, data->map.points[i][j].y);

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:53:24 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/30 22:22:19 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 21:46:09 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ const char	*start_manage(const char *nptr, t_limits *limits)
 
 	limits->neg = 0;
 	s = nptr;
-	c = s[0];
+	c = *s;
 	while (ft_isspace(c))
 		c = *s++;
 	if (c == '-' || c == '+')

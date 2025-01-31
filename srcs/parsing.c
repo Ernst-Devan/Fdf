@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/31 18:39:28 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 21:28:55 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,32 @@ void	get_point_line(t_data *win, char *line)
 {
 	size_t	i;
 	t_point	new_point;
-	
+	char	*endptr;
+
+	if (!line)
+		return;  // Prevents NULL pointer dereference
+
 	i = 0;
 	while (i < win->map.memory_cols)
 	{
-		new_point.x = i * (45);
-		new_point.z = ft_strtol(line, &line, 10);
-		new_point.y = win->map.rows * (40);
+		new_point.x = i * 45;
+		new_point.z = ft_strtol(line, &endptr, 10);
+
+		// Error checking: if no valid number was found, stop processing
+		if (line == endptr)
+		{
+			ft_printf("Error: Invalid number in line\n");
+			break;  // Prevents infinite loop
+		}
+
+		new_point.y = win->map.rows * 40;
 		map_add_point(win, new_point);
+
+		// Move to the next number (skip separators)
+		line = endptr;
+		while (*line == ' ' || *line == ',' || *line == '\t')  // Adjust separators as needed
+			line++;
+
 		i++;
 	}
 }

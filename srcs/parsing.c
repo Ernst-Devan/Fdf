@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/04 13:18:13 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 16:05:14 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ void	display_point(t_data *win)
 	}
 }
 
+int	detect_hexa(char *line)
+{
+	char		c;
+	const char 	*s;
+
+	s = line;
+	if(s[0] == '0' && s[1] == 'x')
+		return(1);
+	return (0); 
+}
+
 int	get_point_line(t_data *win, char *line)
 {
 	size_t	i;
@@ -58,9 +69,14 @@ int	get_point_line(t_data *win, char *line)
 		new_point.x = i * 40;
 		new_point.z = ft_strtol(line, &endptr, 10);
 		if (line == endptr)
-		{
 			return (1);
-			ft_printf("Error");
+		while (ft_isspace(*line))
+			line++;
+		if (*line == ',')
+		{
+			ft_printf("test");
+			line++;
+			new_point.color = ft_strtol(line, &endptr, 16);
 		}
 		new_point.y = win->map.rows * 40;
 		map_add_point(win, new_point);

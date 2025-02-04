@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:42:43 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/04 11:51:22 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 16:04:53 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void initial_program(t_data *win)
 {
+	//bresenham_slope_bigger(win, 150,150,155,180);
 	parsing_map(win);
 	isometrics_cordonate(win);
 }

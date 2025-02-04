@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/31 21:10:02 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 16:04:50 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,42 @@ void	bresenham_algorithm(t_data *data, int Ax, int Ay, int Bx, int By)
 	}
 }
 
+void	bresenham_slope_bigger(t_data *data, int Ax, int Ay, int Bx, int By)
+{
+	int	x;
+	int y;
+	int P;
+	int step;
+	
+	if (By >= Ay)
+		step = 1;
+	else
+		step = -1;	
+	x = Ax;
+	y = Ay;
+	P = 2*(abs_value(Bx - Ax) - abs(By - Ay));
+	while (y <= By)
+	{
+		put_pixel(data, x, y, 0xFFFFFFFF);
+		y++;
+		if (P < 0)
+			P = P + 2 * (abs_value(Bx - Ax));
+		else
+		{
+			P = P + 2 * (abs_value(Bx - Ax)) - 2 *(abs_value(By - Ay));
+			x += step;
+		}
+	}
+}
+//void	choose_bresenham_algo(t_data *data, int Ax, int Ay, int Bx, int By)
+//{
+//	if ()
+//		bresenham_slope_bigger(data, Ax, Ay Bx, By);
+//	else
+//		bresenham_slope_smaller(data, Ax, Ay, Bx, By);
+		
+//}
+
 void	join_point(t_data *data)
 {
 	int i;
@@ -72,7 +108,7 @@ void	join_point(t_data *data)
 			bresenham_algorithm(data, data->map.points[i][j].x, data->map.points[i][j].y, data->map.points[i][j + 1].x, data->map.points[i][j+1].y);
 			if (i < data->map.memory_rows - 1)
 				bresenham_algorithm(data, data->map.points[i + 1][j].x, data->map.points[i + 1][j].y, data->map.points[i][j].x, data->map.points[i][j].y);
-			j++;	
+			j++;
 		}
 		j = 0;
 		i++;

@@ -23,4 +23,5 @@ make
 ## Acknowledgments
 
 - Bresenham Algorithm (https://www.youtube.com/watch?v=RGB-wlatStc&ab_channel=AbdulBari)
+- Slope Line (https://personal.math.ubc.ca/~cass/courses/m308-02b/projects/puhalovic/index.html#Introduction)
 - Isometrics Projection (https://en.wikipedia.org/wiki/Isometric_projection)

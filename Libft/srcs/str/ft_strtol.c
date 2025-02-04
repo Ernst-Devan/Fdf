@@ -6,36 +6,30 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:53:24 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/31 21:46:09 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 11:50:14 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "limits.h"
-#include "errno.h"
-
 const char	*start_manage(const char *nptr, t_limits *limits)
 {
 	const char	*s;
-	int			c;
 
 	limits->neg = 0;
 	s = nptr;
-	c = *s;
-	while (ft_isspace(c))
-		c = *s++;
-	if (c == '-' || c == '+')
+	while (ft_isspace(*s))
+		s++;
+	if (*s == '-' || *s == '+')
 	{
-		if (c == '-')
-			limits->neg = 1;
-		c = *s++;
+		limits->neg = (*s == '-');
+		s++;
 	}
 	limits->coff = LONG_MAX;
 	if (limits->neg)
 		limits->coff = -(unsigned long)LONG_MIN;
-	if (limits->base == 16 && c == '0' && (*s == 'x' || *s == 'X'))
+	if (limits->base == 16 && limits->c == '0' && (*s == 'x' || *s == 'X'))
 	{
-		c = s[1];
+		limits->c = s[1];
 		s += 2;
 	}
 	limits->clim = limits->coff % (unsigned long)limits->base;
@@ -43,41 +37,38 @@ const char	*start_manage(const char *nptr, t_limits *limits)
 	return (s);
 }
 
-void	atoi_part(char *nptr, t_limits lim, size_t *ac, int *any)
+char	*atoi_part(char *s, t_limits *lim, size_t *ac, int *any)
 {
-	lim.c = nptr[-1];
-	while (lim.c)
+	int	digit;
+	
+	while (*s)
 	{
-		if (ft_isdigit(lim.c))
-			lim.c -= '0';
-		else if (ft_isalpha(lim.c))
-		{
-			if (ft_isupper(lim.c))
-				lim.c -= 'A' - 10;
-			else
-				lim.c -= 'a' - 10;
-		}
+		if (ft_isdigit(*s))
+			digit = *s - '0';
+		else if (ft_isalpha(*s))
+			digit = ft_toupper(*s) - 'A' + 10;
 		else
 			break ;
-		if (lim.c >= lim.base)
+		if (digit >= lim->base)
 			break ;
-		if (*any < 0 || *ac > lim.coff || (*ac == lim.coff && lim.c > lim.clim))
+		if (*any < 0 || *ac > lim->coff || (*ac == lim->coff && lim->c > lim->clim))
+		{
 			*any = -1;
-		else
-		{
+			break;
+		}	
 			*any = 1;
-			*ac = *ac * lim.base + lim.c;
-		}
-		lim.c = *nptr++;
+			*ac = *ac * lim->base + digit;
+		s++;
 	}
+	return (s);
 }
 
-void	manage_pointer(char **endptr, const char *nptr, int any)
+void	manage_pointer(char **endptr, const char *nptr, int any, char *s)
 {
-	if (endptr != 0)
+	if (*endptr != NULL)
 	{
 		if (any)
-			*endptr = (char *) nptr - 1;
+			*endptr = s;
 		else
 			*endptr = (char *)nptr;
 	}
@@ -88,15 +79,13 @@ long	ft_strtol(const char *nptr, char **endptr, int base)
 	t_limits		limits;
 	const char		*s;
 	size_t			acc;
-	int				c;
 	int				any;
 
 	limits.base = base;
 	s = start_manage(nptr, &limits);
-	c = s[-1];
 	acc = 0;
 	any = 0;
-	atoi_part((char *)s, limits, &acc, &any);
+	s = atoi_part((char *)s, &limits, &acc, &any);
 	if (any < 0)
 	{
 		if (limits.neg)
@@ -106,6 +95,6 @@ long	ft_strtol(const char *nptr, char **endptr, int base)
 	}
 	else if (limits.neg)
 		acc = -acc;
-	manage_pointer(endptr, nptr, any);
+	manage_pointer(endptr, nptr, any, (char *)s);
 	return (acc);
 }

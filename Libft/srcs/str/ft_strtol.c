@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:53:24 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/04 11:50:14 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 17:09:43 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ const char	*start_manage(const char *nptr, t_limits *limits)
 
 	limits->neg = 0;
 	s = nptr;
+	limits->c = s[0];
 	while (ft_isspace(*s))
 		s++;
 	if (*s == '-' || *s == '+')
@@ -24,14 +25,13 @@ const char	*start_manage(const char *nptr, t_limits *limits)
 		limits->neg = (*s == '-');
 		s++;
 	}
+	if (limits->base == 16)
+		s++;
 	limits->coff = LONG_MAX;
 	if (limits->neg)
 		limits->coff = -(unsigned long)LONG_MIN;
 	if (limits->base == 16 && limits->c == '0' && (*s == 'x' || *s == 'X'))
-	{
-		limits->c = s[1];
-		s += 2;
-	}
+		s++;
 	limits->clim = limits->coff % (unsigned long)limits->base;
 	limits->coff /= (unsigned long)limits->base;
 	return (s);

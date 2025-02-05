@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/31 18:16:00 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 17:12:33 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 	}
 }
 
-
-//TODO Failed allocation and reset the win->cols must be equals 0 and not 1
 int	map_reaalloc(t_data *win)
 {
 	t_point	**new_points;
@@ -80,7 +78,6 @@ int	map_reaalloc(t_data *win)
 	win->map.cols = 0;
 	return(0);
 }
-
 
 void	map_add_point(t_data *win, t_point point)
 {

@@ -6,18 +6,33 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/28 13:57:34 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 17:43:28 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 //! ADD this function inside the Libft And Secure them
 #include "stddef.h"
+#include "libft.h"
+#include "fdf.h"
 
-size_t	ft_ishexa(int c)
+void	display_point(t_data *win)
 {
-	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 70) || (c >= 97 && c <= 102))
-		return (1);
-	return (0);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < win->map.memory_rows)
+	{
+		while (j < win->map.memory_cols)
+		{
+			ft_printf("y:%d ", win->map.points[i][j].y);
+			ft_printf("x:%d \n", win->map.points[i][j].x);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 }
 
 int abs_value(int x)

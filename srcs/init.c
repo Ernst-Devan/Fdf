@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:15:08 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/31 16:28:42 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 17:56:24 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_map	init_map()
 	map.rows = 0;
 	map.memory_cols = 0;
 	map.memory_rows = 1;
+	map.total_rows = 0;
 	map.points = NULL;
 	return (map);
 }
@@ -29,12 +30,12 @@ void init_data(t_data *win)
 {
 	win->img = NULL;
 	win->addr = NULL;
+	win->mlx_ptr = NULL;
+	win->win_ptr = NULL;
 	win->bits_per_pixel = 0;
 	win->line_lenght = 0;
 	win->endian = 0;
 	win->status = 0;
-	win->width = 0;
-	win->lenght = 0;
 	win->fd_map = "maps/42.fdf";
 	win->map = init_map();
 }

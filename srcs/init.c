@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:15:08 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:56:24 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 21:24:38 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void init_data(t_data *win)
 {
 	win->img = NULL;
 	win->addr = NULL;
-	win->mlx_ptr = NULL;
+	win->mlx = NULL;
 	win->win_ptr = NULL;
 	win->bits_per_pixel = 0;
 	win->line_lenght = 0;

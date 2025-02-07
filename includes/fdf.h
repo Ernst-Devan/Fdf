@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:54:41 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/07 12:31:50 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 // STRUCTS
 typedef struct	s_point {
-	size_t	x;
-	size_t	y;
-	int		z;
+	int	x;
+	int	y;
+	int	z;
 	unsigned int color;
 }		t_point;
 
@@ -39,9 +39,9 @@ typedef struct s_map {
 
 typedef struct s_data {
 	void	*img;
-	char	*addr;
-	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*mlx;
+	char	*addr;
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
@@ -68,10 +68,14 @@ void	initial_program(t_data *window);
 void	put_pixel(t_data *data, int x, int y, int color);
 void	isometrics_cordonate(t_data *win);
 void	join_point(t_data *data);
-void	choose_bresenham_algo(t_data *data, int Ax, int Ay, int Bx, int By);
+void	choose_bresenham_algo(t_data *data, t_point point_a, t_point point_b);
 
 // Parsing.c
 int	parsing_map(t_data *win);
 int	parsing_nb_line(t_data *win);
+
+// Moving.c
+int	move(t_data *win, int x, int y);
+int zoom(t_data *win, double zoom);
 
 #endif

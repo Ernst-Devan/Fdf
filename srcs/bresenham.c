@@ -6,112 +6,112 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:06:48 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:47:51 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/07 12:35:51 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "utils.h"
 
-void	bresenham_smaller(t_data *data, int Ax, int Ay, int Bx, int By)
+void	bresenham_smaller(t_data *data, t_point point_a, t_point point_b)
 {
 	int	x;
 	int	y;
 	int	P;
 	int	step;
 	
-	if (By >= Ay)
+	if (point_b.y >= point_a.y)
 		step = 1;
 	else
 		step = -1;
-	x = Ax;
-	y = Ay;
-	P = 2*(abs_value(By - Ay) - abs_value(Bx - Ax));
-	while (x <= Bx)
+	x = point_a.x;
+	y = point_a.y;
+	P = 2*(abs_value(point_b.y - point_a.y) - abs_value(point_b.x - point_a.x));
+	while (x <= point_b.x)
 	{
 		put_pixel(data, x, y, 0xFFFFFF);
 		x++;
 		if (P < 0)
-			P = P + 2 * (abs_value(By - Ay));
+			P = P + 2 * (abs_value(point_b.y - point_a.y));
 		else
 		{
-			P = P + 2 * (abs_value(By - Ay)) - 2 *(abs_value(Bx - Ax));
+			P = P + 2 * (abs_value(point_b.y - point_a.y)) - 2 *(abs_value(point_b.x - point_a.x));
 			y += step;
 		}
 	}
 }
 
-void	bresenham_bigger_down(t_data *data, int Ax, int Ay, int Bx, int By)
+void	bresenham_bigger_down(t_data *data, t_point point_a, t_point point_b)
 {
 	int	x;
 	int	y;
 	int	P;
 
-	x = Ax;
-	y = Ay;
-	P = 2*(abs_value(Bx - Ax) - abs_value(By - Ay));
-	while (y <= By)
+	x = point_a.x;
+	y = point_a.y;
+	P = 2*(abs_value(point_b.x - point_a.x) - abs_value(point_b.y - point_a.y));
+	while (y <= point_b.y)
 	{
 		put_pixel(data, x, y, 0xFFFFFFFF);
 		y++;
 		if (P < 0)
-			P = P + 2 * (abs_value(Bx - Ax));
+			P = P + 2 * (abs_value(point_b.x - point_a.x));
 		else
 		{
-			P = P + 2 * (abs_value(Bx - Ax)) - 2 *(abs_value(By - Ay));
+			P = P + 2 * (abs_value(point_b.x - point_a.x)) - 2 *(abs_value(point_b.y - point_a.y));
 			x++;
 		}
 	}
 }
 
-void	bresenham_bigger_up(t_data *data, int Ax, int Ay, int Bx, int By)
+void	bresenham_bigger_up(t_data *data, t_point point_a, t_point point_b)
 {
 	int	x;
 	int	y;
 	int	P;
 
-	x = Ax;
-	y = Ay;
-	P = 2*(abs_value(Bx - Ax) - abs_value(By - Ay));
-	while (y >= By)
+	x = point_a.x;
+	y = point_a.y;
+	P = 2*(abs_value(point_b.x - point_a.x) - abs_value(point_b.y - point_a.y));
+	while (y >= point_b.y)
 	{
 		put_pixel(data, x, y, 0xFFFFFFFF);
 		y--;
 		if (P < 0)
-			P = P + 2 * (abs_value(Bx - Ax));
+			P = P + 2 * (abs_value(point_b.x - point_a.x));
 		else
 		{
-			P = P + 2 * (abs_value(Bx - Ax)) - 2 *(abs_value(By - Ay));
+			P = P + 2 * (abs_value(point_b.x - point_a.x)) - 2 *(abs_value(point_b.y - point_a.y));
 			x++;
 		}
 	}
 }
-void	choose_bresenham_algo(t_data *data, int Ax, int Ay, int Bx, int By)
+void	choose_bresenham_algo(t_data *data, t_point point_a, t_point point_b)
 {
 	int	slope;
 
-	if (By - Ay == 0 || (Bx - Ax) == 0)
+	if (point_b.y - point_a.y == 0 || (point_b.x - point_a.x) == 0)
 		slope = 0;
 	else
-		slope = (By - Ay)/ (Bx - Ax);
+		slope = (point_b.y - point_a.y)/ (point_b.x - point_a.x);
 	if (slope >= 1 || slope <= -1)
 	{
-		if (Ax >= Bx)
+		if (point_a.x >= point_b.x)
 			if (slope <= -1)
-				bresenham_bigger_down(data, Bx, By, Ax, Ay);
+				bresenham_bigger_down(data, point_b, point_a);
 			else
-				bresenham_bigger_up(data, Bx, By, Ax, Ay);
+				bresenham_bigger_up(data, point_b, point_a);
 		else
 			if (slope >= 1)
-				bresenham_bigger_down(data, Ax, Ay, Bx, By);
+				bresenham_bigger_down(data, point_a, point_b);
 			else
-				bresenham_bigger_up(data, Ax, Ay, Bx, By);
+				bresenham_bigger_up(data, point_a, point_b);
 	}
 	else if (slope >= -1 && slope <= 1)
 	{
-		if (Ax >= Bx)
-			bresenham_smaller(data, Bx, By, Ax, Ay);
+		if (point_a.x >= point_b.x)
+			bresenham_smaller(data, point_b, point_a);
 		else
-			bresenham_smaller(data, Ax, Ay, Bx, By);
+			bresenham_smaller(data, point_a, point_b);
 	}
 }

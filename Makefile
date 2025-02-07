@@ -19,6 +19,7 @@ SRCS 	= fdf.c 	\
 		  utils.c	\
 		  vector.c	\
 		  bresenham.c \
+		  moving.c	\
 
 OBJS 	= $(SRCS:.c=.o)
 

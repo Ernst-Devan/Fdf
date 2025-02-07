@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:08:32 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/07 12:39:47 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,28 @@ void	join_point(t_data *data)
 {
 	int i;
 	int j;
-
+	t_point	point_a;
+	t_point	point_b;
+	
 	i = 0;
 	j = 0;
 	while (i < data->map.memory_rows)
 	{
 		while (j < data->map.memory_cols - 1)
 		{
-			choose_bresenham_algo(data, data->map.points[i][j].x, data->map.points[i][j].y, data->map.points[i][j + 1].x, data->map.points[i][j+1].y);
+			point_a.x = data->map.points[i][j].x;
+			point_a.y = data->map.points[i][j].y;
+			point_b.x = data->map.points[i][j + 1].x;
+			point_b.y = data->map.points[i][j + 1].y;
+			point_b.color = data->map.points[i][j + 1].color;
+			choose_bresenham_algo(data, point_a, point_b);
 			if (i < data->map.memory_rows - 1)
-				choose_bresenham_algo(data, data->map.points[i + 1][j].x, data->map.points[i + 1][j].y, data->map.points[i][j].x, data->map.points[i][j].y);
+			{
+				point_b.x = data->map.points[i + 1][j].x;
+				point_b.y = data->map.points[i + 1][j].y;
+				point_a.color = data->map.points[i][j].color;
+				choose_bresenham_algo(data, point_b, point_a);
+			}
 			j++;
 		}
 		j = 0;

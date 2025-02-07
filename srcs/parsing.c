@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:11:59 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 22:24:29 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parsing_nb_line(t_data *win)
 	return (0);
 }
 
-int	get_point_line(t_data *win, char *line)
+int	get_point_line(t_data *win, char *line, int zoom)
 {
 	size_t	i;
 	t_point	new_point;
@@ -104,7 +104,7 @@ int	parsing_map(t_data *win)
 	map_first_alloc(win);
 	while(line != NULL)
 	{
-		if (get_point_line(win, line))
+		if (get_point_line(win, line, 0))
 			return (1);
 		free(line);
 		line = get_next_line(fd);

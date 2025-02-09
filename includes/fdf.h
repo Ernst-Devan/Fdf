@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/07 12:31:50 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/09 17:19:20 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
-
+#define	ZOOM 2
+#define ZOOM_OUT 2
+#define	MOVE 10
+#define	ISO_ANGLE 0.523599
 // STRUCTS
 typedef struct	s_point {
 	int	x;
@@ -28,12 +31,10 @@ typedef struct	s_point {
 
 
 typedef struct s_map {
-	size_t	ishexa;
 	size_t	cols;
 	size_t	rows;
 	size_t	memory_cols;
 	size_t	memory_rows;
-	size_t	total_rows;
 	t_point	**points;
 }		t_map;
 
@@ -45,14 +46,18 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
-	int		status;
 	char	*fd_map;
-	t_map 	map;
+	int		factor_scale;
+	int		move_x;
+	int		move_y;
+	int		factor_z;
+	t_map	basic;
+	t_map	modified;
 }		t_data;
 
 // Vector.c
-void	map_first_alloc(t_data *win);
-void	map_add_point(t_data *win, t_point point);
+void	map_first_alloc(t_map *map);
+void	map_add_point(t_map *map, t_point point);
 
 // Init.c
 void	init_data(t_data *win);
@@ -65,14 +70,18 @@ void	initial_program(t_data *window);
 
 
 // Draw.c
+void	apply_projection(t_data *win);
 void	put_pixel(t_data *data, int x, int y, int color);
-void	isometrics_cordonate(t_data *win);
+void	isometrics_projection(t_data *win);
 void	join_point(t_data *data);
 void	choose_bresenham_algo(t_data *data, t_point point_a, t_point point_b);
 
+// Error.c
+void	exiting(t_data *win);
+
 // Parsing.c
 int	parsing_map(t_data *win);
-int	parsing_nb_line(t_data *win);
+//int	parsing_nb_line(t_data *win);
 
 // Moving.c
 int	move(t_data *win, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/07 12:39:47 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/09 17:23:33 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "libft.h"
 #include <math.h>
 #include "utils.h"
-#define PI 3.14159265359
-#define	ISO_ANGLE 0.5
 
 void put_pixel(t_data *data, int x, int y, int color)
 {
@@ -27,65 +25,89 @@ void put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	join_point(t_data *data)
+void	apply_projection(t_data *win)
 {
-	int i;
-	int j;
-	t_point	point_a;
-	t_point	point_b;
-	
-	i = 0;
-	j = 0;
-	while (i < data->map.memory_rows)
-	{
-		while (j < data->map.memory_cols - 1)
-		{
-			point_a.x = data->map.points[i][j].x;
-			point_a.y = data->map.points[i][j].y;
-			point_b.x = data->map.points[i][j + 1].x;
-			point_b.y = data->map.points[i][j + 1].y;
-			point_b.color = data->map.points[i][j + 1].color;
-			choose_bresenham_algo(data, point_a, point_b);
-			if (i < data->map.memory_rows - 1)
-			{
-				point_b.x = data->map.points[i + 1][j].x;
-				point_b.y = data->map.points[i + 1][j].y;
-				point_a.color = data->map.points[i][j].color;
-				choose_bresenham_algo(data, point_b, point_a);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
+	isometrics_projection(win);
+	//join_point(win);
 }
 
-void isometrics_cordonate(t_data *win)
+
+// Adding moving and scale factor in the points a / b
+void	adding_factor(t_data *win, t_point *point)
+{	
+	point->x += win->move_x;
+	point->y += win->move_y;
+}
+
+//void	join_point(t_data *win)
+//{
+//	int i;
+//	int j;
+//	t_point	point_a;
+//	t_point	point_b;
+	
+//	i = 0;
+//	j = 0;
+//	while (i < win->map.memory_rows)
+//	{
+//		while (j < win->map.memory_cols - 1)
+//		{
+//			init_point(&point_a);
+//			init_point(&point_b);
+//			point_a.x = win->map.points[i][j].x;
+//			point_a.y = win->map.points[i][j].y;
+//			point_b.x = win->map.points[i][j + 1].x;
+//			point_b.y = win->map.points[i][j + 1].y;
+//			point_b.color = win->map.points[i][j + 1].color;
+//			choose_bresenham_algo(win, point_a, point_b);
+//			//if (i < win->map.memory_rows - 1)
+//			//{
+//			//	point_b.x = win->map.points[i + 1][j].x;
+//			//	point_b.y = win->map.points[i + 1][j].y;
+//			//	point_a.color = win->map.points[i][j].color;
+//			//	choose_bresenham_algo(win, point_b, point_a);
+//			//}
+//			j++;
+//		}
+//		j = 0;
+//		i++;
+//	}
+//	i = 0;
+//	while (i < win->map.memory_rows - 1)
+//	{
+//		point_a.x = win->map.points[i][win->map.memory_cols - 1].x;
+//		point_a.y = win->map.points[i][win->map.memory_cols - 1].y;
+//		point_a.color = win->map.points[i][win->map.memory_cols - 1].color;
+//		point_b.x = win->map.points[i + 1][win->map.memory_cols - 1].x;
+//		point_b.y = win->map.points[i + 1][win->map.memory_cols - 1].y;
+//		choose_bresenham_algo(win, point_a, point_b);
+//		i++;
+//	}
+//}
+
+
+void isometrics_projection(t_data *win)
 {
 	int i;
 	int j;
-	int original_x;
-    int original_y;
-	double a;
-	a = 0.523599;
+	t_point	temp;
 
 	i = 0;
 	j = 0;
-	while (i < win->map.memory_rows)
+	while (i < win->basic.memory_rows)
 	{
-		while (j < win->map.memory_cols)
+		while (j < win->basic.memory_cols)
 		{
-			original_x = win->map.points[i][j].x;
-			original_y = win->map.points[i][j].y;
-			win->map.points[i][j].x = original_x * cos(a) + original_y * cos(a + 2) + win->map.points[i][j].z * cos(a - 2);
-			win->map.points[i][j].y = original_x * sin(a) + original_y * sin(a + 2) + win->map.points[i][j].z * sin(a - 2);
-			win->map.points[i][j].x += 800;
-			win->map.points[i][j].y += 200;
-			put_pixel(win, win->map.points[i][j].x, win->map.points[i][j].y, 0xFFFFFFFF);
+			temp.x = win->basic.points[i][j].x * win->factor_scale;
+			temp.y = win->basic.points[i][j].y * win->factor_scale;
+			temp.z = win->basic.points[i][j].z * win->factor_z;
+			win->basic.points[i][j].x = temp.x * cos(ISO_ANGLE) + temp.y * cos(ISO_ANGLE + 2) + temp.z * cos(ISO_ANGLE - 2);
+			win->basic.points[i][j].y = temp.x * sin(ISO_ANGLE) + temp.y * sin(ISO_ANGLE + 2) + temp.z * sin(ISO_ANGLE - 2);
+			adding_factor(win, &win->basic.points[i][j]);
+			put_pixel(win, win->basic.points[i][j].x, win->basic.points[i][j].y, 0xFFFFFF);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	join_point(win);
 }

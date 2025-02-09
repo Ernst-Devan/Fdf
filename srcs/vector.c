@@ -6,38 +6,38 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:33 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/09 17:03:06 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "stdlib.h"
 
-void	map_first_alloc(t_data *win)
+void	map_first_alloc(t_map *map)
 {
 	t_point **points;
 
 	points = malloc(1 * sizeof(t_point*));
 	if (!points)
 		exit(1);
-	points[0] = malloc(win->map.memory_cols * sizeof(t_point));
+	points[0] = malloc(map->memory_cols * sizeof(t_point));
 	if (!points[0])
 		exit(1);
-	win->map.points = points;
+	map->points = points;
 }
 
-void	cleanup(t_data *win, size_t j)
+void	cleanup(t_map *map, size_t j)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < j)
 	{
-		free(win->map.points[i]);
+		free(map->points[i]);
 		i++;
 	}
-	free(win->map.points);
-	win->map.points = NULL;
+	free(map->points);
+	map->points = NULL;
 }
 
 void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
@@ -54,40 +54,40 @@ void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 	}
 }
 
-int	map_reaalloc(t_data *win)
+int	map_reaalloc(t_map *map)
 {
 	t_point	**new_points;
 	size_t	i;
 	
-	win->map.memory_rows++;
-	new_points = malloc(win->map.memory_rows * sizeof(t_point*));
+	map->memory_rows++;
+	new_points = malloc(map->memory_rows * sizeof(t_point*));
 	if (!new_points)
 		exit(1);
 	i = 0;
-	while (i < win->map.memory_rows)
+	while (i < map->memory_rows)
 	{
-		new_points[i] = malloc(win->map.memory_cols * sizeof(t_point));
+		new_points[i] = malloc(map->memory_cols * sizeof(t_point));
 		if (!new_points[i])
-			cleanup(win, i);
-		if (i < win->map.memory_rows - 1)
-			memlistcpy(win->map.points[i], new_points[i], win->map.memory_cols);
+			cleanup(map, i);
+		if (i < map->memory_rows - 1)
+			memlistcpy(map->points[i], new_points[i], map->memory_cols);
 		i++;
 	}
-	free(win->map.points);
-	win->map.points = new_points;
-	win->map.cols = 0;
+	free(map->points);
+	map->points = new_points;
+	map->cols = 0;
 	return(0);
 }
 
-void	map_add_point(t_data *win, t_point point)
+void	map_add_point(t_map *map, t_point point)
 {
-	if (win->map.cols >= win->map.memory_cols)
-		map_reaalloc(win);
-	win->map.points[win->map.rows][win->map.cols].x = point.x;
-	win->map.points[win->map.rows][win->map.cols].y = point.y;
-	win->map.points[win->map.rows][win->map.cols].z = point.z;
-	win->map.points[win->map.rows][win->map.cols].color = point.color;
-	win->map.cols++;
-	if (win->map.cols > win->map.memory_cols - 1)
-		win->map.rows++;
+	if (map->cols >= map->memory_cols)
+		map_reaalloc(map);
+	map->points[map->rows][map->cols].x = point.x;
+	map->points[map->rows][map->cols].y = point.y;
+	map->points[map->rows][map->cols].z = point.z;
+	map->points[map->rows][map->cols].color = point.color;
+	map->cols++;
+	if (map->cols > map->memory_cols - 1)
+		map->rows++;
 }

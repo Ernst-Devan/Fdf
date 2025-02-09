@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:43:28 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/09 16:46:35 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,26 @@
 #include "libft.h"
 #include "fdf.h"
 
-void	display_point(t_data *win)
-{
-	size_t	i;
-	size_t	j;
+//void	display_point(t_data *win)
+//{
+//	size_t	i;
+//	size_t	j;
 
-	i = 0;
-	j = 0;
-	while (i < win->map.memory_rows)
-	{
-		while (j < win->map.memory_cols)
-		{
-			ft_printf("y:%d ", win->map.points[i][j].y);
-			ft_printf("x:%d \n", win->map.points[i][j].x);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}
+//	i = 0;
+//	j = 0;
+//	while (i < win->map.total_rows)
+//	{
+//		while (j < win->map.memory_cols)
+//		{
+//			ft_printf("\ny:%d, ", win->map.points[i][j].y);
+//			ft_printf("x:%d, ", win->map.points[i][j].x);
+//			ft_printf("z:%d \n", win->map.points[i][j].z);
+//			j++;
+//		}
+//		j = 0;
+//		i++;
+//	}
+//}
 
 int abs_value(int x)
 {

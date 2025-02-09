@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:06:48 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/07 12:35:51 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/08 16:52:23 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	bresenham_smaller(t_data *data, t_point point_a, t_point point_b)
 	P = 2*(abs_value(point_b.y - point_a.y) - abs_value(point_b.x - point_a.x));
 	while (x <= point_b.x)
 	{
-		put_pixel(data, x, y, 0xFFFFFF);
+		put_pixel(data, x, y, point_b.color);
 		x++;
 		if (P < 0)
 			P = P + 2 * (abs_value(point_b.y - point_a.y));
@@ -52,7 +52,7 @@ void	bresenham_bigger_down(t_data *data, t_point point_a, t_point point_b)
 	P = 2*(abs_value(point_b.x - point_a.x) - abs_value(point_b.y - point_a.y));
 	while (y <= point_b.y)
 	{
-		put_pixel(data, x, y, 0xFFFFFFFF);
+		put_pixel(data, x, y, point_b.color);
 		y++;
 		if (P < 0)
 			P = P + 2 * (abs_value(point_b.x - point_a.x));
@@ -75,7 +75,7 @@ void	bresenham_bigger_up(t_data *data, t_point point_a, t_point point_b)
 	P = 2*(abs_value(point_b.x - point_a.x) - abs_value(point_b.y - point_a.y));
 	while (y >= point_b.y)
 	{
-		put_pixel(data, x, y, 0xFFFFFFFF);
+		put_pixel(data, x, y, point_b.color);
 		y--;
 		if (P < 0)
 			P = P + 2 * (abs_value(point_b.x - point_a.x));

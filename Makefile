@@ -4,7 +4,7 @@
 
 CC		= cc
 CFLAGS 	= -Wall -Werror -Wextra -g3
-NAME 	= fdf.out
+NAME 	= fdf
 
 # =======================================
 # Main Directories - Paths
@@ -86,7 +86,7 @@ re: fclean all
 .PHONY: debug
 .SILENT:
 debug: $(OBJS)
-	@$(CC) $(INC_D) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o $(NAME)
+	@$(CC) $(INC_D) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -o $(NAME)
 	$(MAKE) -s --no-print-directory  -C Libft/
 	$(MAKE) -s --no-print-directory  -C minilibx-linux
 

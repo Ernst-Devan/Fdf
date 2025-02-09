@@ -5,7 +5,7 @@
 		"type": "lldb",
 		"request": "launch",
 		"name": "(lldb) Launch",
-		"program": "${workspaceFolder}/fdf.out",
+		"program": "${workspaceFolder}/fdf",
 		"args": [],
 		"cwd": "${workspaceFolder}",
 		"preLaunchTask": "build"
@@ -14,7 +14,7 @@
 		"name": "(gdb) Launch",
 		"type": "cppdbg",
 		"request": "launch",
-		"program": "${workspaceFolder}/fdf.out",
+		"program": "${workspaceFolder}/fdf",
 		"args": [],
 		"stopAtEntry": false,
 		"cwd": "${fileDirname}",

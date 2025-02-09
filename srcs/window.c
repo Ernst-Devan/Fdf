@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:42:43 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 22:34:14 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/09 17:24:29 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void initial_program(t_data *win)
 	//! Error with straight line choose_bresenham_algo(win, 150, 150, 150, 200);
 	//! Protect all mlx function if they failed
 	//choose_bresenham_algo(win, 150, 150, 155, 190);
-	parsing_nb_line(win);
+	//parsing_nb_line(win);
 	parsing_map(win);
-	isometrics_cordonate(win);
+	apply_projection(win);
 }
 
 
@@ -32,29 +32,33 @@ void initial_program(t_data *win)
 int	handle_input(int key, t_data *win)
 {
 	if (key == XK_Escape)
+	{
 		mlx_destroy_window(win->mlx, win->win_ptr);
+		exiting(win);
+	}
 	if (key == XK_d || key == XK_a || key == XK_s || key == XK_w || key == XK_o || key == XK_l)
 	{
 		mlx_destroy_image(win->mlx, win->img);
 		win->img = mlx_new_image(win->mlx, 1920, 1080);
 		if (key == XK_d)
-			move(win, 10, 0);
+			win->move_x += MOVE;
 		if (key == XK_a)
-			move(win, -10, 0);
+			win->move_x += -MOVE;
 		if (key == XK_w)
-			move(win, 0, -10);
+			win->move_y += -MOVE;
 		if (key == XK_s)
-			move(win, 0, 10);
-		if (key == XK_o)
-			zoom(win, 2);
-		if (key == XK_l)
-			zoom(win, -2);
+			win->move_y += MOVE;
+		//if (key == XK_o)
+		//	zoom(win, ZOOM);
+		//if (key == XK_l)
+		//	zoom(win, ZOOM_OUT);
+		apply_projection(win);
 		mlx_put_image_to_window(win->mlx, win->win_ptr, win->img, 0, 0);
 	}
 	return (0);
 }
 
-
+//!change name
 void inital_window(char *map_name)
 {
 	t_data	win;

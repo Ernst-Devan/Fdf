@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/09 17:03:06 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 13:41:02 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ void	cleanup(t_map *map, size_t j)
 	free(map->points);
 	map->points = NULL;
 }
-
+// Description: 
+//	
+//	Duplicate the first struct inside the second
+//
+// Input: Struct_Point_1 / Struct_Point_2 / Number of element to copy
+// Output: Duplicate the point1 to the point2
 void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 {
 	size_t	i;

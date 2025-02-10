@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/09 17:06:05 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 13:46:21 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,29 @@ int	get_point_line(t_map *map, char *line)
 	return (0);
 }
 
+void	duplicate_map(t_map *basic, t_map *modified)
+{
+	size_t	i;
+
+	i = 0;
+	modified->points = malloc((basic->memory_rows) * sizeof(t_point*));
+	//if (!modified->points)
+	//	exiting();
+	while (i < basic->memory_rows)
+	{
+		modified->points[i] = malloc((basic->memory_cols) * sizeof(t_point));
+		//if (modified->points[i])
+		//	exiting();
+		i++;
+	}
+	i = 0;
+	while (i < basic->memory_rows)
+	{
+		memlistcpy(basic->points[i], modified->points[i], basic->memory_cols);
+		i++;
+	}
+}
+
 int	parsing_map(t_data *win)
 {
 	int		fd;
@@ -100,6 +123,7 @@ int	parsing_map(t_data *win)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	duplicate_map(&win->basic, &win->modified);
 	return (0);
 }
 

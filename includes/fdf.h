@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/09 17:19:20 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 15:09:57 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 #include "stddef.h"
 
-#define WINDOW_WIDTH 1920
-#define WINDOW_HEIGHT 1080
-#define	ZOOM 2
-#define ZOOM_OUT 2
+#define W_WIDTH 1920
+#define W_HEIGHT 1080
+#define	Z_ZOOM 0.1
+#define ZOOM_OUT 0.9
+#define ZOOM_IN 1.1
 #define	MOVE 10
-#define	ISO_ANGLE 0.523599
+#define	ISO 0.523599
 // STRUCTS
 typedef struct	s_point {
 	int	x;
@@ -28,7 +29,6 @@ typedef struct	s_point {
 	int	z;
 	unsigned int color;
 }		t_point;
-
 
 typedef struct s_map {
 	size_t	cols;
@@ -47,10 +47,10 @@ typedef struct s_data {
 	int		line_lenght;
 	int		endian;
 	char	*fd_map;
-	int		factor_scale;
+	float	factor_scale;
 	int		move_x;
 	int		move_y;
-	int		factor_z;
+	float	factor_z;
 	t_map	basic;
 	t_map	modified;
 }		t_data;
@@ -58,16 +58,15 @@ typedef struct s_data {
 // Vector.c
 void	map_first_alloc(t_map *map);
 void	map_add_point(t_map *map, t_point point);
+void	memlistcpy(t_point *rows, t_point *new_rows, size_t n);
 
 // Init.c
 void	init_data(t_data *win);
 void	init_point(t_point *point);
 
-
 // Window.c
 void	inital_window(char *map_name);
 void	initial_program(t_data *window);
-
 
 // Draw.c
 void	apply_projection(t_data *win);
@@ -82,9 +81,5 @@ void	exiting(t_data *win);
 // Parsing.c
 int	parsing_map(t_data *win);
 //int	parsing_nb_line(t_data *win);
-
-// Moving.c
-int	move(t_data *win, int x, int y);
-int zoom(t_data *win, double zoom);
 
 #endif

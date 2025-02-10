@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 13:41:02 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 23:00:42 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,20 @@ void	map_first_alloc(t_map *map)
 	map->points = points;
 }
 
-void	cleanup(t_map *map, size_t j)
-{
-	size_t	i;
+//void	cleanup(t_map *map, size_t j)
+//{
+//	size_t	i;
 
-	i = 0;
-	while (i < j)
-	{
-		free(map->points[i]);
-		i++;
-	}
-	free(map->points);
-	map->points = NULL;
-}
-// Description: 
-//	
-//	Duplicate the first struct inside the second
-//
-// Input: Struct_Point_1 / Struct_Point_2 / Number of element to copy
-// Output: Duplicate the point1 to the point2
+//	i = 0;
+//	while (i < j)
+//	{
+//		free(map->points[i]);
+//		i++;
+//	}
+//	free(map->points);
+//	map->points = NULL;
+//}
+
 void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 {
 	size_t	i;
@@ -66,14 +61,14 @@ int	map_reaalloc(t_map *map)
 	
 	map->memory_rows++;
 	new_points = malloc(map->memory_rows * sizeof(t_point*));
-	if (!new_points)
-		exit(1);
+	//!if (!new_points)
+	//	exiting();
 	i = 0;
 	while (i < map->memory_rows)
 	{
 		new_points[i] = malloc(map->memory_cols * sizeof(t_point));
-		if (!new_points[i])
-			cleanup(map, i);
+		//!if (!new_points[i])
+			//exiting();
 		if (i < map->memory_rows - 1)
 			memlistcpy(map->points[i], new_points[i], map->memory_cols);
 		i++;

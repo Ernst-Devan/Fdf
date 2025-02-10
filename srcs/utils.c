@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/09 16:46:35 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 22:59:01 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 #include "stddef.h"
 #include "libft.h"
 #include "fdf.h"
-
-//void	display_point(t_data *win)
-//{
-//	size_t	i;
-//	size_t	j;
-
-//	i = 0;
-//	j = 0;
-//	while (i < win->map.total_rows)
-//	{
-//		while (j < win->map.memory_cols)
-//		{
-//			ft_printf("\ny:%d, ", win->map.points[i][j].y);
-//			ft_printf("x:%d, ", win->map.points[i][j].x);
-//			ft_printf("z:%d \n", win->map.points[i][j].z);
-//			j++;
-//		}
-//		j = 0;
-//		i++;
-//	}
-//}
 
 int abs_value(int x)
 {
@@ -65,12 +44,12 @@ int count_word(char *line)
 	return (count);
 }
 
-int count_cols(char **splited_line)
-{
-	int i;
+//int count_cols(char **splited_line)
+//{
+//	int i;
 
-	i = 0;
-	while (splited_line[i] != NULL)
-		i++;
-	return (i);
-}
+//	i = 0;
+//	while (splited_line[i] != NULL)
+//		i++;
+//	return (i);
+//}

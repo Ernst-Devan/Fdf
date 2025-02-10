@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 13:46:21 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 22:58:02 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,8 @@
 #include	"get_next_line.h"
 #include	"utils.h"
 #include	"stddef.h"
-// Detect overflow inside the map
-// If overflow int don't accept the map
-// Manage the return error
 
 //! Set a default zoom to have no problem when i launch all maps
-//! Floating point exception with ./fdf.out pyramide
-
-//int	parsing_nb_line(t_data *win)
-//{
-//	int		fd;
-//	char	*line;
-//	int		count;
-
-//	count = 0;
-//	fd = open(win->fd_map, O_RDONLY);
-//	if (fd < 0)
-//	{
-//		ft_printf("\nThe map is not detected");
-//		return (1);
-//	}
-//	line = get_next_line(fd);
-//	while(line != NULL)
-//	{
-//		count++;
-//		free(line);
-//		line = get_next_line(fd);
-//	}
-//	win->map.total_rows = count;
-//	close(fd);
-//	return (0);
-//}
-
 int	get_point_line(t_map *map, char *line)
 {
 	size_t	i;

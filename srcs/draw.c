@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 17:23:14 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 23:18:54 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,13 @@ void put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	apply_projection(t_data *win)
-{
-	isometrics_projection(win);
-	//join_point(win);
-}
-
-// Adding moving and scale factor in the points a / b
 void	adding_factor(t_data *win, t_point *point)
 {	
 	point->x += win->move_x;
 	point->y += win->move_y;
 }
 
+//! All point looks don't be joint between us
 void	join_point(t_data *win)
 {
 	int i;
@@ -72,16 +66,16 @@ void	join_point(t_data *win)
 		i++;
 	}
 	i = 0;
-	//while (i < win->basic.memory_rows - 1)
-	//{
-	//	point_a.x = win->modified.points[i][win->modified.memory_cols].x;
-	//	point_a.y = win->modified.points[i][win->modified.memory_cols].y;
-	//	point_a.color = win->modified.points[i][win->modified.memory_cols].color;
-	//	point_b.x = win->modified.points[i + 1][win->modified.memory_cols].x;
-	//	point_b.y = win->modified.points[i + 1][win->modified.memory_cols].y;
-	//	choose_bresenham_algo(win, point_b, point_a);
-	//	i++;
-	//}
+	while (i < win->basic.memory_rows - 1)
+	{
+		point_a.x = win->modified.points[i][win->basic.memory_cols - 1].x;
+		point_a.y = win->modified.points[i][win->basic.memory_cols - 1].y;
+		point_a.color = win->modified.points[i][win->basic.memory_cols - 1].color;
+		point_b.x = win->modified.points[i + 1][win->basic.memory_cols - 1].x;
+		point_b.y = win->modified.points[i + 1][win->basic.memory_cols - 1].y;
+		choose_bresenham_algo(win, point_b, point_a);
+		i++;
+	}
 }
 
 void isometrics_projection(t_data *win)
@@ -108,5 +102,11 @@ void isometrics_projection(t_data *win)
 		j = 0;
 		i++;
 	}
+}
+
+
+void	apply_projection(t_data *win)
+{
+	isometrics_projection(win);
 	join_point(win);
 }

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 15:09:57 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/10 22:54:22 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_data(t_data *win);
 void	init_point(t_point *point);
 
 // Window.c
-void	inital_window(char *map_name);
+void	initial_window(char *map_name);
 void	initial_program(t_data *window);
 
 // Draw.c
@@ -74,6 +74,12 @@ void	put_pixel(t_data *data, int x, int y, int color);
 void	isometrics_projection(t_data *win);
 void	join_point(t_data *data);
 void	choose_bresenham_algo(t_data *data, t_point point_a, t_point point_b);
+
+// Handle_keys.c
+void	manage_hook(t_data win);
+int	handle_keypress(int key, t_data *win);
+int	handle_mouse(int key, int x, int y, t_data *win);
+int	handle_window(t_data *win);
 
 // Error.c
 void	exiting(t_data *win);

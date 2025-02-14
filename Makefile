@@ -3,7 +3,7 @@
 # =======================================
 
 CC		= cc
-CFLAGS 	= -Wall -Werror -Wextra -g3
+CFLAGS 	= -Wall -Werror -Wextra -Ofast
 NAME 	= fdf
 
 # =======================================
@@ -19,7 +19,8 @@ SRCS 	= fdf.c 	\
 		  utils.c	\
 		  vector.c	\
 		  bresenham.c \
-		  handle_keys.c	\
+		  keys.c	\
+		  rotation.c \
 
 OBJS 	= $(SRCS:.c=.o)
 
@@ -62,7 +63,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_D)%.o: $(SRC_D)%.c $(OBJ_D)
 	@$(call green," [v] $<")
-	@$(CC) $(INC_D) -g3 -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC_D) -g3 -c $< -o $@
 
 .PHONY: clean
 .SILENT:

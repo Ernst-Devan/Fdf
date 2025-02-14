@@ -6,20 +6,47 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:40:54 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/07 15:06:54 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 15:44:27 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdlib.h"
 #include "fdf.h"
+#include <mlx.h>
+#include <stdlib.h>
+
+void	cleanup(t_map *maps)
+{
+	size_t	i;
+	
+	i = 0;
+	while (i < maps->rows)
+	{
+		free(maps->points[i]);
+		maps->points[i] = NULL;
+		i++;
+	}
+	free(maps->points);
+	maps->points = NULL;
+}
 
 void	exiting(t_data *win)
 {
-	size_t i;
 
-	i = 0;
-	//if (win->map.points)
-	//{
-	//}
+	if(win)
+	{
+		if(win->img)
+			mlx_destroy_image(win->mlx, win->img);
+		if (win->win_ptr)
+			mlx_destroy_window(win->mlx, win->win_ptr);
+		if (win->mlx)
+		{
+			mlx_destroy_display(win->mlx);
+			free(win->mlx);
+		}
+		if (win->basic.points)
+			cleanup(&win->basic);
+		if (win->modified.points)
+			cleanup(&win->modified);
+	}
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:53:24 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/05 17:09:43 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/13 16:56:21 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 const char	*start_manage(const char *nptr, t_limits *limits)
 {
 	const char	*s;
-
+	
 	limits->neg = 0;
 	s = nptr;
-	limits->c = s[0];
+	limits->c = nptr[0];
 	while (ft_isspace(*s))
 		s++;
 	if (*s == '-' || *s == '+')
@@ -65,13 +65,10 @@ char	*atoi_part(char *s, t_limits *lim, size_t *ac, int *any)
 
 void	manage_pointer(char **endptr, const char *nptr, int any, char *s)
 {
-	if (*endptr != NULL)
-	{
 		if (any)
 			*endptr = s;
 		else
 			*endptr = (char *)nptr;
-	}
 }
 
 long	ft_strtol(const char *nptr, char **endptr, int base)

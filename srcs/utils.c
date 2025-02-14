@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 22:59:01 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 17:34:50 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,29 @@ int count_word(char *line)
 	return (count);
 }
 
-//int count_cols(char **splited_line)
-//{
-//	int i;
+void	duplicate_map(t_data *win)
+{
+	size_t	i;
 
-//	i = 0;
-//	while (splited_line[i] != NULL)
-//		i++;
-//	return (i);
-//}
+	i = 0;
+	win->modified.points = malloc((win->basic.memory_rows) * sizeof(t_point*));
+	if (!win->modified.points)
+		exiting(win);
+	while (i < win->basic.memory_rows)
+	{
+		win->modified.points[i] = malloc((win->basic.memory_cols) * sizeof(t_point));
+		if (!win->modified.points[i])
+			exiting(win);
+		i++;
+	}
+	i = 0;
+	while (i < win->basic.memory_rows)
+	{
+		memlistcpy(win->basic.points[i], win->modified.points[i], win->basic.memory_cols);
+		i++;
+	}
+	win->modified.cols = win->basic.cols;
+	win->modified.rows = win->basic.rows;
+	win->modified.memory_cols = win->basic.memory_cols;
+	win->modified.memory_rows = win->basic.memory_rows;
+}

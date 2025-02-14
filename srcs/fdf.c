@@ -6,13 +6,11 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 22:45:05 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 22:56:01 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 14:50:33 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-// ![] DONT FORGET TO ADD FLAGS DURINT THE COMPILATION
 // ![] ALL RETURN POINTER MUST BE CHECKED IF THEY RETURN NULL
-// ![] DO THE ERROR MANAGEMENT
 // ![] CHECK ALL FREE ARE DO SAME FOR FUNCTION OF THE LIBFT
 
 #include "libft.h"

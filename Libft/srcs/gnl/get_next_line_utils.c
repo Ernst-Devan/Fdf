@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:12:00 by dernst            #+#    #+#             */
-/*   Updated: 2025/01/30 22:25:09 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/13 21:18:20 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ char	*gnl_ft_strjoin(char const *s1, char const *s2)
 
 	if (!s2)
 		return (free((char *)s1), NULL);
-	len_s1 = gnl_ft_strlen(s1, 1);
-	len_s2 = gnl_ft_strlen(s2, 1);
-	str = gnl_ft_calloc((len_s1 + len_s2) + 1, sizeof(char));
+	len_s1 = gnl_ft_strlen(s1, 0);
+	len_s2 = gnl_ft_strlen(s2, 0);
+	str = gnl_ft_calloc((len_s1 + len_s2 + 1), sizeof(char));
 	if (!str)
 		return (free((char *)s1), NULL);
 	j = 0;
@@ -127,7 +127,7 @@ size_t	gnl_ft_strlen(const char *str, int type)
 	i = 0;
 	if (type == 1)
 	{
-		while (str[i] != '\0')
+		while (str[i])
 		{
 			if (str[i] == '\n')
 				return (++i);

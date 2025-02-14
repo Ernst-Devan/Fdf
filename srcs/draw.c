@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 23:18:54 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 16:20:08 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,20 @@ void put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	adding_factor(t_data *win, t_point *point)
+void	adding_factor(t_data *win, t_point *point, int i, int j)
 {	
-	point->x += win->move_x;
-	point->y += win->move_y;
+	point->x = win->basic.points[i][j].x * win->factor_scale;
+	point->y = win->basic.points[i][j].y * win->factor_scale;
+	point->z = win->basic.points[i][j].z * win->factor_scale * win->factor_z;
+	rotate_x(win, point);
+	rotate_y(win, point);
+	rotate_z(win, point);
 }
 
-//! All point looks don't be joint between us
 void	join_point(t_data *win)
 {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 	t_point	point_a;
 	t_point	point_b;
 	
@@ -78,25 +81,23 @@ void	join_point(t_data *win)
 	}
 }
 
-void isometrics_projection(t_data *win)
+void point_projection(t_data *win)
 {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 	t_point	temp;
 
 	i = 0;
 	j = 0;
-	while (i < win->basic.memory_rows)
+	while (i < win->modified.memory_rows)
 	{
-		while (j < win->basic.memory_cols)
+		while (j < win->modified.memory_cols)
 		{
-			temp.x = win->basic.points[i][j].x * win->factor_scale;
-			temp.y = win->basic.points[i][j].y * win->factor_scale;
-			temp.z = win->basic.points[i][j].z * win->factor_scale * win->factor_z;
-			win->modified.points[i][j].x = temp.x * cos(ISO) + temp.y * cos(ISO + 2) + temp.z * cos(ISO - 2);
-			win->modified.points[i][j].y = temp.x * sin(ISO) + temp.y * sin(ISO + 2) + temp.z * sin(ISO - 2);
-			adding_factor(win, &win->modified.points[i][j]);
-			put_pixel(win, win->modified.points[i][j].x, win->modified.points[i][j].y, 0xFFFFFF);
+			adding_factor(win, &temp, i, j);
+			win->modified.points[i][j].x =temp.x * cos(ISO) + temp.y * cos(ISO + 2) + temp.z * cos(ISO - 2);
+			win->modified.points[i][j].y = temp.x * sin(ISO) + temp.y * sin(ISO + 2) + temp.z * sin(ISO - 2);;
+			win->modified.points[i][j].x += win->m_x + (win->modified.cols >> 1);
+			win->modified.points[i][j].y += win->m_y + (win->modified.rows >> 1);
 			j++;
 		}
 		j = 0;
@@ -104,9 +105,18 @@ void isometrics_projection(t_data *win)
 	}
 }
 
+//void oblique_projection(t_data *win)
+//{
+////  !New view 0
+//}
+
+
 
 void	apply_projection(t_data *win)
 {
-	isometrics_projection(win);
+	if (win->projection == 0)
+		point_projection(win);
+	//if (win->projection == 1)
+	//	oblique_projection(win);
 	join_point(win);
 }

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:03:33 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/10 22:58:28 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 17:31:48 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 int	abs_value(int x);
 int	count_word(char *line);
+void	duplicate_map(t_data *win);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:40:54 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/14 15:44:27 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 11:30:10 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	cleanup(t_map *maps)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < maps->rows)
 	{
@@ -31,10 +31,9 @@ void	cleanup(t_map *maps)
 
 void	exiting(t_data *win)
 {
-
-	if(win)
+	if (win)
 	{
-		if(win->img)
+		if (win->img)
 			mlx_destroy_image(win->mlx, win->img);
 		if (win->win_ptr)
 			mlx_destroy_window(win->mlx, win->win_ptr);

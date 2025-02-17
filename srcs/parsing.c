@@ -6,51 +6,43 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/14 15:28:44 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 11:54:36 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"fdf.h"
-#include	<fcntl.h>
-#include	"libft.h"
-#include	"get_next_line.h"
-#include	"utils.h"
-#include	"stddef.h"
+#include "fdf.h"
+#include <fcntl.h>
+#include "libft.h"
+#include "get_next_line.h"
+#include "utils.h"
+#include "stddef.h"
 
-//! Set a default zoom to have no problem when i launch all maps
-void	get_point_line(t_map *map, char *line)
+int	get_point_line(t_map *map, char *line)
 {
 	size_t	i;
 	t_point	new_point;
 	char	*endptr;
-	unsigned long int color;
 
 	i = 0;
-	endptr = NULL;
 	init_point(&new_point);
-	while (i < map->memory_cols)
+	while (i++ < map->memory_cols)
 	{
 		new_point.x = i;
 		new_point.z = ft_strtol(line, &endptr, 10);
 		if (line == endptr)
-			return;
+			return (1);
 		line = endptr;
-		if (*line == ',')
-		{
-			line++;
+		if (*line++ == ',')
 			new_point.color = ft_strtol(line, &endptr, 16);
-			color = new_point.color;
-		}
 		line = endptr;
 		while (line && ft_isspace(*line))
 			line++;
 		new_point.y = map->rows;
 		if (map_add_point(map, new_point))
-			return;
-		i++;
+			return (1);
 	}
+	return (0);
 }
-
 
 int	parsing_map(t_data *win)
 {
@@ -69,9 +61,10 @@ int	parsing_map(t_data *win)
 	win->basic.memory_cols = count_word(line);
 	if (map_first_alloc(&win->basic))
 		exiting(win);
-	while(line != NULL)
+	while (line != NULL)
 	{
-		get_point_line(&win->basic, line);
+		if (get_point_line(&win->basic, line))
+			exiting(win);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -79,4 +72,3 @@ int	parsing_map(t_data *win)
 	duplicate_map(win);
 	return (0);
 }
-

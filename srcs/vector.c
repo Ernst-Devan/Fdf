@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/14 15:45:55 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 11:36:38 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int	map_first_alloc(t_map *map)
 {
-	t_point **points;
+	t_point	**points;
 
-	points = malloc(1 * sizeof(t_point*));
+	points = malloc(1 * sizeof(t_point *));
 	if (!points)
 		return (1);
 	points[0] = malloc(map->memory_cols * sizeof(t_point));
@@ -30,6 +30,7 @@ int	map_first_alloc(t_map *map)
 void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 {
 	size_t	i;
+
 	i = 0;
 	while (i < n)
 	{
@@ -45,9 +46,9 @@ int	map_reaalloc(t_map *map)
 {
 	t_point	**new_points;
 	size_t	i;
-	
+
 	map->memory_rows++;
-	new_points = malloc(map->memory_rows * sizeof(t_point*));
+	new_points = malloc(map->memory_rows * sizeof(t_point *));
 	if (!new_points)
 		return (1);
 	i = 0;
@@ -63,14 +64,14 @@ int	map_reaalloc(t_map *map)
 	cleanup(map);
 	map->points = new_points;
 	map->cols = 0;
-	return(0);
+	return (0);
 }
 
 int	map_add_point(t_map *map, t_point point)
 {
 	if (map->cols >= map->memory_cols)
 		if (map_reaalloc(map))
-			return(1);
+			return (1);
 	map->points[map->rows][map->cols].x = point.x;
 	map->points[map->rows][map->cols].y = point.y;
 	map->points[map->rows][map->cols].z = point.z;

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:14:30 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:47 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 11:40:58 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	rotate_x(t_data *win, t_point *point)
 {
 	t_point	temp;
-	
+
 	init_point(&temp);
 	temp.y = point->y;
 	temp.z = point->z;
@@ -27,7 +27,7 @@ void	rotate_x(t_data *win, t_point *point)
 void	rotate_y(t_data *win, t_point *point)
 {
 	t_point	temp;
-	
+
 	init_point(&temp);
 	temp.x = point->x;
 	temp.z = point->z;
@@ -38,7 +38,7 @@ void	rotate_y(t_data *win, t_point *point)
 void	rotate_z(t_data *win, t_point *point)
 {
 	t_point	temp;
-	
+
 	init_point(&temp);
 	temp.x = point->x;
 	temp.y = point->y;

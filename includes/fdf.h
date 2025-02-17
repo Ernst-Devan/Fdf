@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/14 15:45:36 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 17:27:16 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_data {
 	float	r_z;
 	int		m_x;
 	int		m_y;
-	int		projection;
 	float	factor_z;
 	t_map	basic;
 	t_map	modified;

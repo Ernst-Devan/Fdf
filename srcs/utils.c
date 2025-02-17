@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/12 17:34:50 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 12:02:04 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #include "libft.h"
 #include "fdf.h"
 
-int abs_value(int x)
+int	abs_value(int x)
 {
-	if(x < 0)
+	if (x < 0)
 	{
-		return(x * -1);
+		return (x * -1);
 	}
 	return (x);
 }
 
-int count_word(char *line)
+int	count_word(char *line)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -49,12 +49,13 @@ void	duplicate_map(t_data *win)
 	size_t	i;
 
 	i = 0;
-	win->modified.points = malloc((win->basic.memory_rows) * sizeof(t_point*));
+	win->modified.points = malloc((win->basic.memory_rows) * sizeof(t_point *));
 	if (!win->modified.points)
 		exiting(win);
 	while (i < win->basic.memory_rows)
 	{
-		win->modified.points[i] = malloc((win->basic.memory_cols) * sizeof(t_point));
+		win->modified.points[i]
+			= malloc((win->basic.memory_cols) * sizeof(t_point));
 		if (!win->modified.points[i])
 			exiting(win);
 		i++;
@@ -62,7 +63,8 @@ void	duplicate_map(t_data *win)
 	i = 0;
 	while (i < win->basic.memory_rows)
 	{
-		memlistcpy(win->basic.points[i], win->modified.points[i], win->basic.memory_cols);
+		memlistcpy(win->basic.points[i],
+			win->modified.points[i], win->basic.memory_cols);
 		i++;
 	}
 	win->modified.cols = win->basic.cols;

@@ -10,17 +10,18 @@ NAME 	= fdf
 # Main Directories - Paths
 # =======================================
 
-SRCS 	= fdf.c 	\
-		  parsing.c	\
-		  draw.c	\
-		  window.c	\
-		  error.c	\
-		  init.c	\
-		  utils.c	\
-		  vector.c	\
-		  bresenham.c \
-		  keys.c	\
-		  rotation.c \
+SRCS 	= fdf.c 		\
+		  parsing.c		\
+		  draw.c		\
+		  window.c		\
+		  error.c		\
+		  init.c		\
+		  utils.c		\
+		  vector.c		\
+		  bresenham.c	\
+		  keys.c		\
+		  rotation.c 	\
+		  join.c		\
 
 OBJS 	= $(SRCS:.c=.o)
 
@@ -83,6 +84,11 @@ fclean:	clean
 re: fclean all
 	$(MAKE) -s --no-print-directory  re -C minilibx-linux
 	$(MAKE) -s --no-print-directory  fclean -C Libft/
+
+.PHONY: norminette
+norminette:
+	watch norminette $(SRC_D)
+	watch norminette &(INC_D)
 
 .PHONY: debug
 .SILENT:

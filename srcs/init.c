@@ -6,17 +6,17 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:15:08 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/14 14:10:40 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 17:35:41 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "math.h"
 
-t_map	init_map()
+t_map	init_map(void)
 {
 	t_map	map;
-	
+
 	map.cols = 0;
 	map.rows = 0;
 	map.memory_cols = 0;
@@ -25,7 +25,7 @@ t_map	init_map()
 	return (map);
 }
 
-void init_data(t_data *win)
+void	init_data(t_data *win)
 {
 	win->img = NULL;
 	win->addr = NULL;
@@ -35,12 +35,11 @@ void init_data(t_data *win)
 	win->line_lenght = 0;
 	win->endian = 0;
 	win->fd_map = "maps/42.fdf";
-	win->projection = 0;
-	win->factor_scale = 40;
+	win->factor_scale = 1;
 	win->factor_z = 1;
 	win->r_z = 0;
-    win->r_x = 0;  // approximately 35.264 degrees
-    win->r_y = 0; 
+	win->r_x = 0;
+	win->r_y = 0;
 	win->m_x = 800;
 	win->m_y = 200;
 	win->basic = init_map();

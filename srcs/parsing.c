@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 11:54:36 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/18 15:45:09 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	get_point_line(t_map *map, char *line)
 	char	*endptr;
 
 	i = 0;
-	init_point(&new_point);
 	while (i++ < map->memory_cols)
 	{
+		init_point(&new_point);
 		new_point.x = i;
 		new_point.z = ft_strtol(line, &endptr, 10);
 		if (line == endptr)
@@ -35,8 +35,6 @@ int	get_point_line(t_map *map, char *line)
 		if (*line++ == ',')
 			new_point.color = ft_strtol(line, &endptr, 16);
 		line = endptr;
-		while (line && ft_isspace(*line))
-			line++;
 		new_point.y = map->rows;
 		if (map_add_point(map, new_point))
 			return (1);

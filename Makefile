@@ -3,7 +3,7 @@
 # =======================================
 
 CC		= cc
-CFLAGS 	= -Wall -Werror -Wextra -Ofast
+CFLAGS 	= -Wall -Werror -Wextra -Ofast -g3
 NAME 	= fdf
 
 # =======================================
@@ -60,7 +60,7 @@ OBJS	:= $(addprefix $(OBJ_D), $(OBJS))
 SRCS	:= $(addprefix $(SRC_D), $(SRCS))
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INC_D) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o $(NAME)
+	@$(CC) $(INC_D) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_D)%.o: $(SRC_D)%.c $(OBJ_D)
 	@$(call green," [v] $<")
@@ -89,14 +89,7 @@ re: fclean all
 norminette:
 	watch norminette $(SRC_D)
 	watch norminette &(INC_D)
-
-.PHONY: debug
-.SILENT:
-debug: $(OBJS)
-	@$(CC) $(INC_D) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -o $(NAME)
-	$(MAKE) -s --no-print-directory  -C Libft/
-	$(MAKE) -s --no-print-directory  -C minilibx-linux
-
+	
 .SILENT:
 $(OBJ_D):
 	mkdir -p $(OBJ_D)

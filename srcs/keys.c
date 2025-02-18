@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:47:10 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 17:58:55 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/18 15:41:28 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	handle_keypress(int key, t_data *win)
 			allowed_keys = 1;
 	if (allowed_keys == 1)
 	{
-		ft_bzero(win->addr, W_HEIGHT * win->line_lenght);
+		mlx_destroy_image(win->mlx, win->img);
+		win->img = mlx_new_image(win->mlx, W_WIDTH, W_HEIGHT);
 		apply_projection(win);
 		mlx_put_image_to_window(win->mlx, win->win_ptr, win->img, 0, 0);
 	}
@@ -93,7 +94,8 @@ int	handle_mouse(int key, int x, int y, t_data *win)
 	(void)y;
 	if (key == 4 || key == 5)
 	{
-		ft_bzero(win->addr, W_HEIGHT * win->line_lenght);
+		mlx_destroy_image(win->mlx, win->img);
+		win->img = mlx_new_image(win->mlx, W_WIDTH, W_HEIGHT);
 		if (key == 4)
 			win->factor_scale *= ZOOM_IN;
 		if (key == 5)

@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 17:46:11 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/18 16:11:07 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	adding_factor(t_data *win, t_point *point, int i, int j)
 	rotate_x(win, point);
 	rotate_y(win, point);
 	rotate_z(win, point);
-}
+} 
 
 void	point_projection(t_data *win)
 {

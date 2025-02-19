@@ -87,8 +87,7 @@ re: fclean all
 
 .PHONY: norminette
 norminette:
-	watch norminette $(SRC_D)
-	watch norminette &(INC_D)
+	watch norminette $(SRC_D) $(INC_D)
 	
 .SILENT:
 $(OBJ_D):

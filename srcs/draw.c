@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/18 16:11:07 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/19 17:36:54 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	adding_factor(t_data *win, t_point *point, int i, int j)
 	rotate_x(win, point);
 	rotate_y(win, point);
 	rotate_z(win, point);
-} 
+}
 
 void	point_projection(t_data *win)
 {
@@ -48,6 +48,7 @@ void	point_projection(t_data *win)
 	{
 		while (j < win->modified.memory_cols)
 		{
+			init_point(&temp);
 			adding_factor(win, &temp, i, j);
 			win->modified.points[i][j].x = temp.x * cos(ISO) + temp.y
 				* cos(ISO + 2) + temp.z * cos(ISO - 2);

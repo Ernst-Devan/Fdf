@@ -6,15 +6,16 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:53:24 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/13 16:56:21 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/19 16:28:36 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 const char	*start_manage(const char *nptr, t_limits *limits)
 {
 	const char	*s;
-	
+
 	limits->neg = 0;
 	s = nptr;
 	limits->c = nptr[0];
@@ -40,7 +41,7 @@ const char	*start_manage(const char *nptr, t_limits *limits)
 char	*atoi_part(char *s, t_limits *lim, size_t *ac, int *any)
 {
 	int	digit;
-	
+
 	while (*s)
 	{
 		if (ft_isdigit(*s))
@@ -51,13 +52,14 @@ char	*atoi_part(char *s, t_limits *lim, size_t *ac, int *any)
 			break ;
 		if (digit >= lim->base)
 			break ;
-		if (*any < 0 || *ac > lim->coff || (*ac == lim->coff && lim->c > lim->clim))
+		if (*any < 0 || *ac > lim->coff
+			|| (*ac == lim->coff && lim->c > lim->clim))
 		{
 			*any = -1;
-			break;
-		}	
-			*any = 1;
-			*ac = *ac * lim->base + digit;
+			break ;
+		}
+		*any = 1;
+		*ac = *ac * lim->base + digit;
 		s++;
 	}
 	return (s);
@@ -65,10 +67,10 @@ char	*atoi_part(char *s, t_limits *lim, size_t *ac, int *any)
 
 void	manage_pointer(char **endptr, const char *nptr, int any, char *s)
 {
-		if (any)
-			*endptr = s;
-		else
-			*endptr = (char *)nptr;
+	if (any)
+		*endptr = s;
+	else
+		*endptr = (char *)nptr;
 }
 
 long	ft_strtol(const char *nptr, char **endptr, int base)

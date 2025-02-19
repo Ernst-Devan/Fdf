@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 11:36:38 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/19 17:55:00 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	memlistcpy(t_point *rows, t_point *new_rows, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		new_rows[i].x = rows[i].x;
-		new_rows[i].y = rows[i].y;
-		new_rows[i].z = rows[i].z;
-		new_rows[i].color = rows[i].color;
+		new_rows[i] = rows[i];
 		i++;
 	}
 }

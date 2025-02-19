@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:47:10 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/18 15:41:28 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/19 16:19:31 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 #include "fdf.h"
 #include <mlx.h>
 #include "libft.h"
-
-void	manage_hook(t_data *win)
-{
-	mlx_hook(win->win_ptr, KeyPress, KeyPressMask, &handle_keypress, win);
-	mlx_hook(win->win_ptr, DestroyNotify, NoEventMask, &handle_window, win);
-	mlx_hook(win->win_ptr, ButtonPress, ButtonPressMask, &handle_mouse, win);
-}
 
 int	key_factor(int key, t_data *win)
 {
@@ -72,7 +65,8 @@ int	handle_keypress(int key, t_data *win)
 	if (key == XK_d || key == XK_a || key == XK_s || key == XK_w)
 		if (key_move(key, win))
 			allowed_keys = 1;
-	if (key == K_7 || key == K_9 || key == K_4 || key == K_6 || key == K_1 || key == K_3)
+	if (key == K_7 || key == K_9 || key == K_4 || key == K_6
+		|| key == K_1 || key == K_3)
 		if (key_rotate(key, win))
 			allowed_keys = 1;
 	if (key == XK_o || key == XK_l || key == XK_t || key == XK_y)
@@ -103,11 +97,5 @@ int	handle_mouse(int key, int x, int y, t_data *win)
 		apply_projection(win);
 		mlx_put_image_to_window(win->mlx, win->win_ptr, win->img, 0, 0);
 	}
-	return (0);
-}
-
-int	handle_window(t_data *win)
-{
-	exiting(win);
 	return (0);
 }

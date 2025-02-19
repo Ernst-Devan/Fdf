@@ -6,39 +6,41 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 17:27:16 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/19 16:33:13 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include "stddef.h"
+# include "stddef.h"
 
-# define W_WIDTH 1920
-# define W_HEIGHT 1080
-# define Z_ZOOM 0.1
-# define ZOOM_OUT 0.9
-# define ZOOM_IN 1.1
-# define MOVE 10
-# define ISO 0.523599
-# define PI 3.14159265358979323846
-# define K_7 65429
-# define K_9 65434
-# define K_4 65430
-# define K_6 65432
-# define K_1 65436
-# define K_3 65435
+# define W_WIDTH	1920
+# define W_HEIGHT	1080
+# define Z_ZOOM		0.1
+# define ZOOM_OUT	0.9
+# define ZOOM_IN	1.1
+# define MOVE		10
+# define ISO		0.523599
+# define PI			3.14159265358979323846
+# define K_7		65429
+# define K_9		65434
+# define K_4		65430
+# define K_6		65432
+# define K_1		65436
+# define K_3		65435
 
 // STRUCTS
-typedef struct	s_point {
-	int	x;
-	int	y;
-	int	z;
-	unsigned int color;
+typedef struct s_point
+{
+	int				x;
+	int				y;
+	int				z;
+	unsigned int	color;
 }		t_point;
 
-typedef struct s_map {
+typedef struct s_map
+{
 	size_t	cols;
 	size_t	rows;
 	size_t	memory_cols;
@@ -46,7 +48,8 @@ typedef struct s_map {
 	t_point	**points;
 }		t_map;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	void	*img;
 	void	*win_ptr;
 	void	*mlx;
@@ -77,7 +80,6 @@ void	init_point(t_point *point);
 
 // Window.c
 void	initial_window(char *map_name);
-void	initial_program(t_data *window);
 
 // Draw.c
 void	apply_projection(t_data *win);
@@ -102,7 +104,6 @@ void	rotate_y(t_data *win, t_point *point);
 void	rotate_z(t_data *win, t_point *point);
 
 // Parsing.c
-int	parsing_map(t_data *win);
-//int	parsing_nb_line(t_data *win);
+int		parsing_map(t_data *win);
 
 #endif

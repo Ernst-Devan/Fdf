@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:15:08 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 17:35:41 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/19 16:35:42 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_data(t_data *win)
 	win->line_lenght = 0;
 	win->endian = 0;
 	win->fd_map = "maps/42.fdf";
-	win->factor_scale = 1;
+	win->factor_scale = 40;
 	win->factor_z = 1;
 	win->r_z = 0;
 	win->r_x = 0;

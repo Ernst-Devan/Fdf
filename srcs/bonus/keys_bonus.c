@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   keys_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:47:10 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/19 16:19:31 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/20 16:57:05 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int	handle_mouse(int key, int x, int y, t_data *win)
 		mlx_destroy_image(win->mlx, win->img);
 		win->img = mlx_new_image(win->mlx, W_WIDTH, W_HEIGHT);
 		if (key == 4)
-			win->factor_scale *= ZOOM_IN;
+			win->f_scale *= ZOOM_IN;
 		if (key == 5)
-			win->factor_scale *= ZOOM_OUT;
+			win->f_scale *= ZOOM_OUT;
 		apply_projection(win);
 		mlx_put_image_to_window(win->mlx, win->win_ptr, win->img, 0, 0);
 	}

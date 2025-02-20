@@ -6,11 +6,10 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 12:02:04 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/20 13:31:48 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//! ADD this function inside the Libft And Secure them
 #include "stddef.h"
 #include "libft.h"
 #include "fdf.h"

@@ -3,33 +3,49 @@
 # =======================================
 
 CC		= cc
-CFLAGS 	= -Wall -Werror -Wextra -Ofast -g3
+CCFLAGS ?= -Wall -Werror -Wextra -Ofast
+DEBUG	= -g
 NAME 	= fdf
 
 # =======================================
 # Main Directories - Paths
 # =======================================
 
-SRCS 	= fdf.c 		\
-		  parsing.c		\
-		  draw.c		\
-		  window.c		\
-		  error.c		\
-		  init.c		\
-		  utils.c		\
-		  vector.c		\
-		  bresenham.c	\
-		  keys.c		\
-		  rotation.c 	\
-		  join.c		\
+SRC_FILES	?=	fdf.c 				\
+		  		draw.c				\
+		  		window.c			\
+		  		error.c				\
+		  		init.c				\
+		  		utils.c				\
+		  		parsing.c			\
+		  		vector.c			\
+		  		bresenham.c			\
+		  		keys.c				\
+		  		rotation.c			\
+		  		join.c
 
-OBJS 	= $(SRCS:.c=.o)
+SRC_BONUS	=	fdf_bonus.c 		\
+		  		draw_bonus.c		\
+		  		window_bonus.c		\
+		  		error_bonus.c		\
+		  		parsing_bonus.c		\
+		  		init_bonus.c		\
+		  		utils_bonus.c		\
+		  		vector_bonus.c		\
+		  		bresenham_bonus.c	\
+		  		keys_bonus.c	\
+		  		rotation_bonus.c	\
+		  		join_bonus.c
 
-SRC_D	= srcs/
-OBJ_D	= objs/
-INC_D	= -Iincludes 		\
-		  -ILibft/includes 	\
-		  -Iminilibx-linux	\
+OBJS 	= $(SRC_FILES:.c=.o)
+
+SRC_DIR		?= srcs/basic/
+SRC_DIR_BONUS = srcs/bonus/
+
+OBJ_D		= objs/
+INC_D		= -Iincludes 		\
+			-ILibft/includes 	\
+			-Iminilibx-linux	\
 
 # =======================================
 # Decoration Text - Colors
@@ -47,48 +63,47 @@ cyan   	= 	/bin/echo -e "\x1b[36m$1\x1b[0m"
 # =======================================
 
 .PHONY:all
-.SILENT:
 all :
-	@$(call yellow," ENTER LIBFT DIRECTORY")
-	$(MAKE) --no-print-directory -C Libft/
-	@$(call yellow," ENTER MINILIBX DIRECTORY")
-	$(MAKE) -s --no-print-directory -C minilibx-linux
-	@$(call yellow," ENTER FDF DIRECTORY")
-	$(MAKE) -s --no-print-directory $(NAME)
+	$(MAKE) -C Libft/
+	$(MAKE) -C minilibx-linux
+	$(MAKE) $(NAME)
 
-OBJS	:= $(addprefix $(OBJ_D), $(OBJS))
-SRCS	:= $(addprefix $(SRC_D), $(SRCS))
+OBJS		:= $(addprefix $(OBJ_D), $(OBJS))
+SRC_FILES	:= $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 $(NAME): $(OBJS)
 	@$(CC) $(INC_D) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o $(NAME)
 
-$(OBJ_D)%.o: $(SRC_D)%.c $(OBJ_D)
-	@$(call green," [v] $<")
-	@$(CC) $(CFLAGS) $(INC_D) -g3 -c $< -o $@
+$(OBJ_D)%.o: $(SRC_DIR)%.c $(OBJ_D)
+	@$(CC) $(CCFLAGS) $(INC_D) -g3 -c $< -o $@
+
+.PHONY: bonus
+bonus:
+	$(MAKE) SRC_FILES="$(SRC_BONUS)" SRC_DIR="$(SRC_DIR_BONUS)"
+
+.PHONY: debug
+debug:
+	$(MAKE) CCFLAGS=$(DEBUG)
 
 .PHONY: clean
-.SILENT:
 clean:
-	$(MAKE) -s --no-print-directory  clean -C minilibx-linux
-	$(MAKE) -s --no-print-directory  clean -C Libft/
+	$(MAKE) clean -C minilibx-linux
+	$(MAKE) clean -C Libft/
 	rm -rf $(OBJ_D)
 
 .PHONY: fclean
-.SILENT:
 fclean:	clean
-	$(MAKE) -s --no-print-directory  fclean -C Libft/ 
+	$(MAKE) fclean -C Libft/ 
 	rm -f $(NAME)
 
 .PHONY: re
-.SILENT:
 re: fclean all
-	$(MAKE) -s --no-print-directory  re -C minilibx-linux
-	$(MAKE) -s --no-print-directory  fclean -C Libft/
+	$(MAKE) re -C minilibx-linux
+	$(MAKE) fclean -C Libft/
 
 .PHONY: norminette
 norminette:
-	watch norminette $(SRC_D) $(INC_D)
-	
-.SILENT:
+	watch norminette $(SRC_DIR) $(INC_D)
+
 $(OBJ_D):
 	mkdir -p $(OBJ_D)

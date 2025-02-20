@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:15:08 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/19 16:35:42 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/20 17:18:51 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	init_data(t_data *win)
 	win->line_lenght = 0;
 	win->endian = 0;
 	win->fd_map = "maps/42.fdf";
-	win->factor_scale = 40;
-	win->factor_z = 1;
+	win->f_scale = 0;
+	win->factor_z = 0.1;
 	win->r_z = 0;
 	win->r_x = 0;
 	win->r_y = 0;
-	win->m_x = 800;
-	win->m_y = 200;
+	win->m_x = 0;
+	win->m_y = 0;
 	win->basic = init_map();
 	win->modified = init_map();
 }

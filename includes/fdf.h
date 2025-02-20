@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/19 16:33:13 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/20 16:53:09 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 	int		line_lenght;
 	int		endian;
 	char	*fd_map;
-	float	factor_scale;
+	float	f_scale;
 	float	r_x;
 	float	r_y;
 	float	r_z;
@@ -79,7 +79,7 @@ void	init_data(t_data *win);
 void	init_point(t_point *point);
 
 // Window.c
-void	initial_window(char *map_name);
+void	initial_window(t_data *win, char *map_name);
 
 // Draw.c
 void	apply_projection(t_data *win);

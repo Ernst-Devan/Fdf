@@ -3,7 +3,8 @@
 # =======================================
 
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra $(INCLUDES_D)
+CCFLAGS		=	-Wall -Werror -Wextra
+CPPFLAGS	=	$(INCLUDES_D)
 NAME		=	libft.a
 
 # =======================================
@@ -181,14 +182,14 @@ $(NAME): $(OBJS)
 
 $(OBJ_D)%.o:$(SRC_D)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(BIN_D):
 	mkdir -p $(BIN_D)
 
 .PHONY: debug
 debug: $(OBJS) | $(BIN_D)
-	$(CC) $(OBJS) $(CFLAGS) -g -o $(BIN_D)a.out
+	$(CC) $(OBJS) $(CCFLAGS) -g -o $(BIN_D)a.out
 	cd bin && ./a.out
 
 .PHONY: clean

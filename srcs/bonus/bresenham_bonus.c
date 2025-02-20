@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham.c                                        :+:      :+:    :+:   */
+/*   bresenham_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:06:48 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/19 16:40:13 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/20 18:04:08 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,31 +80,49 @@ void	bresenham_bigger(t_data *data, t_point a, t_point b)
 	}
 }
 
-void	choose_bresenham_algo(t_data *data, t_point point_a, t_point point_b)
+void	swap(t_point *a, t_point *b)
+{
+	unsigned long int	temp;
+
+	temp = b->color;
+	b->color = a->color;
+	a->color = temp;
+}
+
+void	choose_bresenham_algo(t_data *data, t_point a, t_point b)
 {
 	int	slope;
 
-	if (point_b.x == point_a.x)
+	if (b.x == a.x)
 	{
-		if (point_a.y > point_b.y)
-			bresenham_bigger(data, point_b, point_a);
+		if (a.y > b.y)
+		{
+			swap(&a, &b);
+			bresenham_bigger(data, b, a);
+		}
 		else
-			bresenham_bigger(data, point_a, point_b);
+			bresenham_bigger(data, a, b);
 		return ;
 	}
-	slope = (point_b.y - point_a.y) / (point_b.x - point_a.x);
+	slope = (b.y - a.y) / (b.x - a.x);
 	if (slope >= 1 || slope <= -1)
 	{
-		if (point_a.x >= point_b.x)
-			bresenham_bigger(data, point_a, point_b);
+		if (a.x >= b.x)
+			bresenham_bigger(data, a, b);
 		else
-			bresenham_bigger(data, point_b, point_a);
+		{
+			swap(&a, &b);
+			bresenham_bigger(data, b, a);
+		}
 	}
 	else if (slope >= -1 && slope <= 1)
 	{
-		if (point_a.x >= point_b.x)
-			bresenham_smaller(data, point_b, point_a);
+		if (a.x >= b.x)
+		{
+			swap(&a, &b);
+			bresenham_smaller(data, b, a);
+		}
 		else
-			bresenham_smaller(data, point_a, point_b);
+			bresenham_smaller(data, a, b);
 	}
 }

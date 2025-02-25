@@ -21,7 +21,6 @@ SRC_FILES	?=	fdf.c 				\
 		  		vector.c			\
 		  		bresenham.c			\
 		  		keys.c				\
-		  		rotation.c			\
 		  		join.c
 
 SRC_BONUS	=	fdf_bonus.c 		\

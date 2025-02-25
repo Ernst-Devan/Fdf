@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/20 18:23:59 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/25 17:09:25 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	adding_factor(t_data *win, t_point *point, int i, int j)
 	point->x = win->basic.points[i][j].x * win->f_scale;
 	point->y = win->basic.points[i][j].y * win->f_scale;
 	point->z = win->basic.points[i][j].z * win->f_scale * win->factor_z;
-	rotate_x(win, point);
-	rotate_y(win, point);
-	rotate_z(win, point);
 }
 
 void	point_projection(t_data *win)

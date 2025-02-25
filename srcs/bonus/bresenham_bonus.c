@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:06:48 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/20 18:04:08 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/25 18:06:28 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,17 @@ void	bresenham_bigger(t_data *data, t_point a, t_point b)
 	}
 }
 
-void	swap(t_point *a, t_point *b)
+void	swap(t_data *data, t_point *a, t_point *b, int issmaler)
 {
 	unsigned long int	temp;
 
 	temp = b->color;
 	b->color = a->color;
 	a->color = temp;
+	if (issmaler)
+		bresenham_smaller(data, *b, *a);
+	else
+		bresenham_bigger(data, *b, *a);
 }
 
 void	choose_bresenham_algo(t_data *data, t_point a, t_point b)
@@ -96,10 +100,7 @@ void	choose_bresenham_algo(t_data *data, t_point a, t_point b)
 	if (b.x == a.x)
 	{
 		if (a.y > b.y)
-		{
-			swap(&a, &b);
-			bresenham_bigger(data, b, a);
-		}
+			swap(data, &a, &b, 0);
 		else
 			bresenham_bigger(data, a, b);
 		return ;
@@ -110,18 +111,12 @@ void	choose_bresenham_algo(t_data *data, t_point a, t_point b)
 		if (a.x >= b.x)
 			bresenham_bigger(data, a, b);
 		else
-		{
-			swap(&a, &b);
-			bresenham_bigger(data, b, a);
-		}
+			swap(data, &a, &b, 0);
 	}
 	else if (slope >= -1 && slope <= 1)
 	{
 		if (a.x >= b.x)
-		{
-			swap(&a, &b);
-			bresenham_smaller(data, b, a);
-		}
+			swap(data, &a, &b, 1);
 		else
 			bresenham_smaller(data, a, b);
 	}

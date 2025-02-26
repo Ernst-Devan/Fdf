@@ -6,6 +6,12 @@ Fdf representing a landscape as a 3D object in wich all surfaces are outlined in
 
 ## Project overview
 
+![Screenshot from 2025-02-26 16-00-42](https://github.com/user-attachments/assets/3e345687-5000-416a-95b2-58c5ed628631)
+
+![Screenshot from 2025-02-10 17-49-46](https://github.com/user-attachments/assets/77d92ef3-907a-41f5-9416-bf38ea20f974)
+
+![Screenshot from 2025-02-26 16-04-12](https://github.com/user-attachments/assets/05c49dec-f4ef-47c2-9e7e-7d44d6dea721)
+
 ## Getting Started
 ### Download the repository
 ```

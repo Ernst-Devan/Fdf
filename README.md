@@ -16,7 +16,7 @@ how to use the minilibx a little libraries to manage window and display pixel on
 ## Project overview
 
 #### Mandatory Part
-![Screenshot from 2025-02-26 16-00-42](https://github.com/user-attachments/assets/3e345687-5000-416a-95b2-58c5ed628631)
+![Screenshot from 2025-02-26 16-16-00](https://github.com/user-attachments/assets/abed95ad-e03b-4907-831e-b8e926c40d0a)
 
 #### Bonus Part
 ![Screenshot from 2025-02-10 17-49-46](https://github.com/user-attachments/assets/77d92ef3-907a-41f5-9416-bf38ea20f974)

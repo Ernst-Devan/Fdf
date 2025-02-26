@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:47:10 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/20 18:08:17 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:13:08 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <X11/X.h>
 #include "fdf.h"
 #include <mlx.h>
-#include "libft.h"
 
 void	manage_hook(t_data *win)
 {
@@ -28,12 +27,12 @@ int	handle_keypress(int key, t_data *win)
 
 	allowed_keys = 0;
 	if (key == XK_Escape)
-		exiting(win);
+		exiting(win, NULL);
 	return (0);
 }
 
 int	handle_window(t_data *win)
 {
-	exiting(win);
+	exiting(win, NULL);
 	return (0);
 }

@@ -6,13 +6,12 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:06:48 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/25 22:39:16 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:11:59 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "utils.h"
-#include <stdio.h>
 
 void	bresenham_smaller(t_data *data, t_point a, t_point b)
 {

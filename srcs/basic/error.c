@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:40:54 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/17 11:30:10 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:12:16 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	cleanup(t_map *maps)
 	maps->points = NULL;
 }
 
-void	exiting(t_data *win)
+void	exiting(t_data *win, char *line)
 {
 	if (win)
 	{
@@ -47,5 +47,7 @@ void	exiting(t_data *win)
 		if (win->modified.points)
 			cleanup(&win->modified);
 	}
+	if (line)
+		free(line);
 	exit(1);
 }

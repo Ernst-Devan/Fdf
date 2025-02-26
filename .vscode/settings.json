@@ -63,6 +63,12 @@
 	"random": "c",
 	"stddef.h": "c",
 	"keysym.h": "c",
-	"utils.h": "c"
+	"utils.h": "c",
+	"stdlib.h": "c",
+	"get_next_line.h": "c",
+	"fcntl.h": "c",
+	"x.h": "c",
+	"math.h": "c",
+	"mlx.h": "c"
 }
 }

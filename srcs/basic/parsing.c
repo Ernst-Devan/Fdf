@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:52:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/19 17:56:09 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:13:49 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "libft.h"
 #include "get_next_line.h"
 #include "utils.h"
-#include "stddef.h"
 
 int	get_point_line(t_map *map, char *line)
 {
@@ -51,18 +50,18 @@ int	parsing_map(t_data *win)
 	if (fd < 0)
 	{
 		ft_printf("\nThe map is not detected");
-		exiting(win);
+		exiting(win, NULL);
 	}
 	line = get_next_line(fd);
 	if (!line)
-		exiting(win);
+		exiting(win, NULL);
 	win->basic.memory_cols = count_word(line);
 	if (map_first_alloc(&win->basic))
-		exiting(win);
+		exiting(win, line);
 	while (line != NULL)
 	{
 		if (get_point_line(&win->basic, line))
-			exiting(win);
+			exiting(win, line);
 		free(line);
 		line = get_next_line(fd);
 	}

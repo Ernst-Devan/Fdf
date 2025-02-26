@@ -6,15 +6,13 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:47:10 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/20 16:57:05 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:17:30 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <X11/keysym.h>
-#include <X11/X.h>
 #include "fdf.h"
 #include <mlx.h>
-#include "libft.h"
 
 int	key_factor(int key, t_data *win)
 {
@@ -61,7 +59,7 @@ int	handle_keypress(int key, t_data *win)
 
 	allowed_keys = 0;
 	if (key == XK_Escape)
-		exiting(win);
+		exiting(win, NULL);
 	if (key == XK_d || key == XK_a || key == XK_s || key == XK_w)
 		if (key_move(key, win))
 			allowed_keys = 1;

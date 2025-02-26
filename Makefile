@@ -4,9 +4,13 @@
 
 CC		= cc
 CCFLAGS ?= -Wall -Werror -Wextra -Ofast
+CPPFLAGS = -MMD -MP $(INC_D)
 DEBUG	= -g
 NAME 	= fdf
 MOD		= 0
+INC_D		= -Iincludes 		\
+			-ILibft/includes 	\
+			-Iminilibx-linux	\
 
 # =======================================
 # Main Directories - Paths
@@ -37,20 +41,6 @@ SRC_DIR			= srcs/basic/
 SRC_DIR_BONUS	= srcs/bonus/
 
 OBJ_D		= objs/
-INC_D		= -Iincludes 		\
-			-ILibft/includes 	\
-			-Iminilibx-linux	\
-
-# =======================================
-# Decoration Text - Colors
-# =======================================
-
-red    	= 	/bin/echo -e "\x1b[31m$1\x1b[0m"
-green  	= 	/bin/echo -e "\x1b[32m$1\x1b[0m"
-yellow 	= 	/bin/echo -e "\x1b[33m$1\x1b[0m"
-blue   	= 	/bin/echo -e "\x1b[34m$1\x1b[0m"
-magenta = 	/bin/echo -e "\x1b[35m$1\x1b[0m"
-cyan   	= 	/bin/echo -e "\x1b[36m$1\x1b[0m"
 
 # =======================================
 # Switch Between Mandatory And Bonus - Colors
@@ -67,7 +57,7 @@ endif
 # =======================================
 
 OBJS 			= $(GLOBAL_FILES:.c=.o)
-DEPS			= $(OBJS:.o=.d)
+DEPS			= $(GLOBAL_FILES:.c=.d)
 DEPS			:= $(addprefix $(OBJ_D), $(DEPS))
 OBJS			:= $(addprefix $(OBJ_D), $(OBJS))
 BONUS_FILES		:= $(addprefix $(SRC_DIR_BONUS), $(BONUS_FILES))
@@ -88,10 +78,10 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) Libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_D)%.o: $(SRC_DIR)%.c | $(OBJ_D)
-	@$(CC) $(CCFLAGS) $(INC_D) -g3 -c $< -o $@
+	@$(CC) $(CCFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_D)%.o: $(SRC_DIR_BONUS)%.c | $(OBJ_D)
-	@$(CC) $(CCFLAGS) $(INC_D) -g3 -c $< -o $@
+	@$(CC) $(CCFLAGS) $(CPPFLAGS) -c $< -o $@
 
 .PHONY: bonus
 bonus:
@@ -113,9 +103,10 @@ re: fclean all
 	$(MAKE) re -C minilibx-linux
 	$(MAKE) fclean -C Libft/
 
-
 $(OBJ_D):
 	mkdir -p $(OBJ_D)
+
+-include $(DEPS)
 
 # =======================================
 #  Custom Command

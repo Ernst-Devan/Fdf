@@ -6,11 +6,10 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:02:55 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/20 13:31:48 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:14:06 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stddef.h"
 #include "libft.h"
 #include "fdf.h"
 
@@ -50,13 +49,13 @@ void	duplicate_map(t_data *win)
 	i = 0;
 	win->modified.points = malloc((win->basic.memory_rows) * sizeof(t_point *));
 	if (!win->modified.points)
-		exiting(win);
+		exiting(win, NULL);
 	while (i < win->basic.memory_rows)
 	{
 		win->modified.points[i]
 			= malloc((win->basic.memory_cols) * sizeof(t_point));
 		if (!win->modified.points[i])
-			exiting(win);
+			exiting(win, NULL);
 		i++;
 	}
 	i = 0;

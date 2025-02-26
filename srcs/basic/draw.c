@@ -6,15 +6,12 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:47:07 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/25 17:09:25 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:11:45 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <mlx.h>
-#include "libft.h"
 #include <math.h>
-#include "utils.h"
 
 void	put_pixel(t_data *data, int x, int y, int color)
 {

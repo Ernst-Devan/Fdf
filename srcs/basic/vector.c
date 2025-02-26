@@ -6,7 +6,7 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:16:02 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/19 17:55:00 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:14:18 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	map_reaalloc(t_map *map)
 	{
 		new_points[i] = malloc(map->memory_cols * sizeof(t_point));
 		if (!new_points[i])
+		{
+			free(new_points);
 			return (1);
+		}
 		if (i < map->memory_rows - 1)
 			memlistcpy(map->points[i], new_points[i], map->memory_cols);
 		i++;

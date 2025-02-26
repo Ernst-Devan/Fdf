@@ -6,14 +6,22 @@
 /*   By: dernst <dernst@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:31:31 by dernst            #+#    #+#             */
-/*   Updated: 2025/02/25 17:14:24 by dernst           ###   ########lyon.fr   */
+/*   Updated: 2025/02/26 14:00:24 by dernst           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+// =======================================
+// INCLUDES
+// =======================================
+
 # include "stddef.h"
+
+// =======================================
+// DEFINES
+// =======================================
 
 # define W_WIDTH	1920
 # define W_HEIGHT	1080
@@ -30,7 +38,10 @@
 # define K_1		65436
 # define K_3		65435
 
+// =======================================
 // STRUCTS
+// =======================================
+
 typedef struct s_point
 {
 	int				x;
@@ -69,6 +80,10 @@ typedef struct s_data
 	t_map	modified;
 }		t_data;
 
+// =======================================
+// FUNCTIONS
+// =======================================
+
 // Vector.c
 int		map_first_alloc(t_map *map);
 int		map_add_point(t_map *map, t_point point);
@@ -95,7 +110,7 @@ int		handle_mouse(int key, int x, int y, t_data *win);
 int		handle_window(t_data *win);
 
 // Error.c
-void	exiting(t_data *win);
+void	exiting(t_data *win, char *line);
 void	cleanup(t_map *map);
 
 // Rotation.c
